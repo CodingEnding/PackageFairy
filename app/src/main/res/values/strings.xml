@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">套餐精灵</string>
+    <string name="navigation_item_statistics">统计</string>
+    <string name="navigation_item_find">发现</string>
+    <string name="navigation_item_report">推荐报告</string>
+    <string name="navigation_item_account">账户</string>
+
+    <!-- 格式化字符串 -->
+    <string name="flow_text">%sM</string>
+    <string name="call_text">%s分钟</string>
+</resources>

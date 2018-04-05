@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#E51C23</color>
+    <color name="colorPrimaryDark">#D01716</color>
+    <color name="colorAccent">#FFC107</color>
+
+    <!-- 底部导航的背景色 -->
+    <color name="navigation_background">#ECEFF1</color>
+    <!-- 底部导航按钮被选中的图标颜色 -->
+    <color name="navigation_item_active">#E51C23</color>
+
+    <!-- ****************图表相关的颜色*********** -->
+    <!-- 流量显示区域弹窗的字体颜色 -->
+    <color name="flow_marker_text">#fff</color>
+    <!-- 流量显示区域弹窗的背景颜色 -->
+    <color name="flow_marker_background">#E84E40</color>
+
+</resources>
