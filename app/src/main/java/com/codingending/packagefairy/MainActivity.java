@@ -13,13 +13,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Toast;
 
+import com.codingending.packagefairy.activity.BaseActivity;
+import com.codingending.packagefairy.activity.RecommendActivity;
 import com.codingending.packagefairy.adapter.NavigationFragmentAdapter;
+import com.codingending.packagefairy.fragment.ReportFragment;
+import com.codingending.packagefairy.utils.DeviceUtils;
+import com.codingending.packagefairy.utils.LogUtils;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
@@ -36,10 +39,12 @@ public class MainActivity extends BaseActivity {
     public static final int INDEX_ACCOUNT=3;//底部导航的账户按钮
 
     public static final int PAGE_OFFSET=3;//ViewPager屏幕外最大页面数（避免导航页中的任何一页被销毁）
-    public static final int PERMISSION_REQUEST=1;//权限请求码
+
+    public static final int RECOMMEND_ACTIVITY_CODE=1;//前往套餐推荐Activity的推荐码
 
     private Toolbar toolbar;
     private ViewPager viewPager;
+    private NavigationFragmentAdapter navigationAdapter;//ViewPager适配器
     private SpaceNavigationView bottomNavigationView;
 
     @Override
@@ -47,8 +52,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        requestPermissions();
-        hasPermissionToReadNetworkStats();
         initViews();
         initToolbar();
         initViewPager();
@@ -61,15 +64,15 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.onSaveInstanceState(outState);//保存导航菜单的选中状态
     }
 
-    //初始化Toolbar
-    private void initToolbar(){
+    @Override
+    protected void initToolbar() {
         setSupportActionBar(toolbar);
     }
 
     //初始化ViewPager
     private void initViewPager(){
         FragmentManager fragmentManager=getSupportFragmentManager();
-        NavigationFragmentAdapter navigationAdapter=new NavigationFragmentAdapter(fragmentManager);
+        navigationAdapter=new NavigationFragmentAdapter(fragmentManager);
         viewPager.setAdapter(navigationAdapter);
         viewPager.setOffscreenPageLimit(PAGE_OFFSET);//配置屏幕外最大页面数（避免导航页中的任何一页被销毁）
         viewPager.setCurrentItem(0);
@@ -101,11 +104,11 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
-                Toast.makeText(MainActivity.this,"中间按钮被点击",Toast.LENGTH_LONG).show();
+                startActivityForResult(new Intent(MainActivity.this,
+                        RecommendActivity.class),RECOMMEND_ACTIVITY_CODE);//打开套餐推荐弹窗界面
             }
             @Override
             public void onItemClick(int itemIndex, String itemName) {
-                Toast.makeText(MainActivity.this,"按钮索引："+itemIndex+"按钮名字："+itemName,Toast.LENGTH_LONG).show();
                 switch (itemIndex){//根据索引切换页面
                     case INDEX_STATISTICS:
                         viewPager.setCurrentItem(INDEX_STATISTICS,false);
@@ -136,58 +139,21 @@ public class MainActivity extends BaseActivity {
         viewPager= (ViewPager) findViewById(R.id.viewpager);
     }
 
-    /**
-     * 检测并请求权限
-     */
-    private void requestPermissions(){
-        String requestPermission=Manifest.permission.READ_PHONE_STATE;
-        if(ContextCompat.checkSelfPermission(this,requestPermission)
-                != PackageManager.PERMISSION_GRANTED){//读取设备状态的权限
-            if(ActivityCompat.shouldShowRequestPermissionRationale(
-                    this,requestPermission)){
-                Toast.makeText(this,"读取设备状态权限是本应用的重要功能，如果不授予权限，程序是无法正常工作的~",
-                        Toast.LENGTH_SHORT).show();
-            }
-            ActivityCompat.requestPermissions(this,new String[]{requestPermission},PERMISSION_REQUEST);
-        }
-    }
-
-    /**
-     * 检测并引导用户打开特殊权限
-     */
-    private boolean hasPermissionToReadNetworkStats() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-        final AppOpsManager appOps = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
-        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
-                android.os.Process.myUid(), getPackageName());
-        if (mode == AppOpsManager.MODE_ALLOWED) {
-            return true;
-        }
-
-        requestReadNetworkStats();
-        return false;
-    }
-
-    // 打开[有权查看使用情况的应用]页面
-    @TargetApi(23)
-    private void requestReadNetworkStats() {
-        Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-        startActivity(intent);
-    }
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    protected void onActivityResult(int requestCode,int resultCode, Intent data) {
         switch (requestCode){
-            case PERMISSION_REQUEST:
-                if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(this,"授权成功",Toast.LENGTH_SHORT).show();
+            case RECOMMEND_ACTIVITY_CODE://将基础数据传递到ReportFragment
+                if(resultCode==RESULT_OK){
+                    Bundle bundle=new Bundle(data.getBundleExtra(RecommendActivity.KEY_DATA_BUNDLE));
+                    navigationAdapter.notifyFragmentByPosition(INDEX_REPORT,bundle);//刷新推荐结果界面
+                    viewPager.setCurrentItem(INDEX_REPORT);//跳转到推荐结果界面
+                    LogUtils.i(TAG,"onActivityResult");
                 }
                 break;
             default:
-                super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+                super.onActivityResult(requestCode,resultCode,data);
                 break;
         }
     }
+
 }

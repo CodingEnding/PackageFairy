@@ -2,7 +2,15 @@
 <resources>
     <color name="colorPrimary">#E51C23</color>
     <color name="colorPrimaryDark">#D01716</color>
-    <color name="colorAccent">#FFC107</color>
+    <color name="colorAccent">#E51C23</color>
+
+    <color name="color_gray">#e0e0e0</color>
+    <color name="color_pink_one">#e91463</color>
+    <color name="color_pink_two">#880e4f</color>
+    <color name="color_pink_three">#e84e40</color>
+    <color name="color_purple_one">#9c27b0</color>
+    <color name="color_purple_two">#d500f9</color>
+    <color name="color_purple_three">#4a148c</color>
 
     <!-- 底部导航的背景色 -->
     <color name="navigation_background">#ECEFF1</color>
@@ -14,5 +22,62 @@
     <color name="flow_marker_text">#fff</color>
     <!-- 流量显示区域弹窗的背景颜色 -->
     <color name="flow_marker_background">#E84E40</color>
+
+    <!-- *************套餐推荐弹出窗口相关的颜色************ -->
+    <!-- 背景色 -->
+    <color name="recommend_window_background">#FAFAFA</color>
+    <!-- 提示文字的颜色 -->
+    <color name="recommend_window_tips_text">#424242</color>
+    <!-- 输入文字的颜色 -->
+    <color name="recommend_window_text">#212121</color>
+    <!-- 按钮的文字颜色 -->
+    <color name="recommend_window_btn_text">#FFF</color>
+    <!-- 按钮按下时的背景颜色 -->
+    <color name="recommend_window_btn_back_press">#E51C23</color>
+    <!-- 按钮普通状态时的背景颜色 -->
+    <color name="recommend_window_btn_back_normal">#E84E40</color>
+    <!-- 卡片背景颜色 -->
+    <color name="recommend_window_card_background">#FAFAFA</color>
+    <!-- 焦点色 -->
+    <color name="recommend_window_accent_color">#E84E40</color>
+
+    <!-- ***********发现界面********* -->
+    <!-- 套餐评分文字颜色 -->
+    <color name="find_package_star_text">#ef6c00</color>
+    <!-- 背景色 -->
+    <color name="find_background">#FAFAFA</color>
+    <!-- 指定App免流的文字颜色 -->
+    <color name="find_free_flow_text">#2baf2b</color>
+    <!-- 月租文字颜色 -->
+    <color name="find_month_rent_text">#2baf2b</color>
+
+    <!-- *************套餐推荐结果界面相关的颜色************ -->
+    <!--主文字颜色-->
+    <color name="report_text">#212121</color>
+    <!--提示文字颜色-->
+    <color name="report_tips_text">#424242</color>
+    <!--按钮文字颜色-->
+    <color name="report_btn_text">#fff</color>
+    <!-- 指定App免流的文字颜色 -->
+    <color name="report_free_flow_text">#2baf2b</color>
+    <!--按钮正常状态的背景颜色-->
+    <color name="report_btn_normal">#E84E40</color>
+    <!--按钮按下状态的背景颜色-->
+    <color name="report_btn_pressed">#E51C23</color>
+    <!-- 预计消费金额文字颜色 -->
+    <color name="report_consume_text">#fb8c00</color>
+
+    <!-- *************账户界面相关的颜色************ -->
+    <!-- 标题文字颜色 -->
+    <color name="account_title_text">#E51C23</color>
+    <!--主文字颜色-->
+    <color name="account_text">#EF212121</color>
+    <color name="user_text">#EF212121</color>
+
+    <!-- ************登录/注册********** -->
+    <color name="login_btn_normal">#E84E40</color>
+    <color name="login_btn_pressed">#E51C23</color>
+    <color name="login_btn_disable">#F69988</color>
+    <color name="login_text">#424242</color>
 
 </resources>

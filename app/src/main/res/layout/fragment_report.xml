@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <!-- 允许嵌套滑动 -->
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:text="Menu3"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- 顶部的提示卡片 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_report_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/text_view_report_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="24dp"
+                        android:textColor="@color/report_text"
+                        android:text="@string/report_title"
+                        android:textSize="22sp"/>
+                    <TextView
+                        android:id="@+id/text_view_report_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:textColor="@color/report_tips_text"
+                        android:text="@string/report_no_data_tips"
+                        android:lineSpacingMultiplier="1.2"
+                        android:textSize="16sp"/>
+                    <Button
+                        android:id="@+id/btn_get_recommend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/report_btn_background"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/report_btn_text"
+                        android:text="@string/report_btn_recommend"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 推荐结果列表 -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

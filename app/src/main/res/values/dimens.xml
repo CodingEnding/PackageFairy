@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 底部分割线的高度 -->
+    <dimen name="bottom_line_height">2px</dimen>
+
     <dimen name="flow_window_text_size">12sp</dimen>
+
+    <!--  ****************与推荐弹窗相关的属性**************  -->
+    <!-- 推荐弹窗提示文字的大小 -->
+    <dimen name="recommend_tips_text_size">16sp</dimen>
+    <!-- 推荐弹窗输入文字的大小 -->
+    <dimen name="recommend_text_size">16sp</dimen>
+
+    <!-- **********账户界面******* -->
+    <dimen name="account_title_size">15sp</dimen>
+    <dimen name="account_text_size">16sp</dimen>
+    <!-- 设置项的主要间隔 -->
+    <dimen name="account_text_padding_left">12dp</dimen>
+    <dimen name="account_text_padding_top">12dp</dimen>
+    <dimen name="account_text_padding_bottom">12dp</dimen>
+    <!-- 标题项的主要间隔 -->
+    <dimen name="account_title_margin_left">16dp</dimen>
+    <dimen name="account_title_margin_top">24dp</dimen>
+    <dimen name="account_title_margin_bottom">8dp</dimen>
+
+    <dimen name="user_text_size">16sp</dimen>
+    <dimen name="user_text_padding_left">16dp</dimen>
+    <dimen name="user_text_padding_top">16dp</dimen>
+    <dimen name="user_text_padding_bottom">16dp</dimen>
+
 </resources>

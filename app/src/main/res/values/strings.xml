@@ -1,11 +1,81 @@
 <resources>
     <string name="app_name">套餐精灵</string>
+    <string name="activity_user">用户</string>
+    <string name="activity_login">登录/注册</string>
     <string name="navigation_item_statistics">统计</string>
     <string name="navigation_item_find">发现</string>
     <string name="navigation_item_report">推荐报告</string>
     <string name="navigation_item_account">账户</string>
 
+    <string name="report_free_flow">指定App免流</string>
+    <string name="report_extra_type_one">全国流量%d元/GB</string>
+    <string name="report_extra_type_two">全国日租</string>
+    <string name="report_extra_type_three">省内/省外日租</string>
+    <string name="report_extra_type_four">省内日租/省外流量</string>
+    <string name="report_extra_type_five">全国无限流量</string>
+    <string name="report_extra_type_six">全国日租无限流量</string>
+    <string name="report_extra_type_seven">省内日租无限流量/省外日租</string>
+
+    <!-- 统计界面 -->
+    <string name="statistic_permission_title">权限提醒</string>
+    <string name="statistic_permission_denied">您拒绝了某项权限，这将导致应用功能异常</string>
+    <string name="statistic_read_stats_denied">[访问使用记录] 这项权限对于套餐精灵非常重要，请您授予此项权限</string>
+    <string name="statistic_read_stats_info">[访问使用记录] 这项权限对于套餐精灵非常重要，请您在接下来打开的页面中找到套餐精灵，然后开启此项权限</string>
+    <string name="dialog_read_stats_title">重要权限</string>
+    <string name="dialog_read_stats_sure">确定</string>
+    <string name="dialog_read_stats_cancel">取消</string>
+    <string name="statistic_dialog_sure">重新授权</string>
+    <string name="statistic_dialog_cancel">拒绝授权</string>
+
+
+    <!-- 推荐套餐结果界面 -->
+    <string name="report_recommend_tips">以下是根据您以往的流量/通话使用情况，选出的最合适的推荐套餐列表</string>
+    <string name="report_no_data_tips">这里空荡荡的，您还没有获得过推荐套餐</string>
+    <string name="report_title">推荐套餐</string>
+    <string name="report_btn_recommend">获取推荐</string>
+    <string name="report_btn_new_recommend">重新推荐</string>
+
+    <!-- 账户界面 -->
+    <string name="account_item_login">登录/注册</string>
+    <string name="account_title_user">账号与设备</string>
+    <string name="account_title_app">应用</string>
+    <string name="account_item_backup">同步设置</string>
+    <string name="account_item_device">我的设备</string>
+    <string name="account_item_update">检查更新</string>
+    <string name="account_item_library">开源协议</string>
+    <string name="account_item_about">关于</string>
+    <string name="account_item_logout">退出登录</string>
+
+    <!-- 用户信息界面 -->
+    <string name="user_name_tips">暂未获取到用户名</string>
+    <string name="user_email_tips">暂未获取到邮箱</string>
+    <string name="user_phone_tips">点击设置手机号</string>
+    <string name="user_change_password">修改密码</string>
+    <string name="logout_tips">确定要退出登录吗？</string>
+    <string name="logout_sure">确定</string>
+    <string name="logout_cancel">取消</string>
+    <string name="logout_succeed">已经退出登录</string>
+
+    <!-- 登录/注册 -->
+    <string name="login_email_hint">邮箱</string>
+    <string name="login_username_hint">用户名</string>
+    <string name="login_password_hint">密码</string>
+    <string name="login_btn_login">登录</string>
+    <string name="login_btn_register">注册</string>
+    <string name="register_email_exist">邮箱已被注册</string>
+    <string name="register_error">注册失败</string>
+    <string name="register_succeed">注册成功</string>
+    <string name="login_error">账号或密码错误</string>
+    <string name="login_succeed">登录成功</string>
+    <string name="login_forget">忘记密码？</string>
+    <string name="menu_login_text">登录</string>
+    <string name="menu_register_text">注册</string>
+
     <!-- 格式化字符串 -->
     <string name="flow_text">%sM</string>
     <string name="call_text">%s分钟</string>
+    <string name="report_consume_text">预计%d元/月</string>
+    <string name="find_package_star">%.1f分</string>
+    <string name="find_package_no_star">暂无评分</string>
+    <string name="find_package_month_rent">月租%d元</string>
 </resources>

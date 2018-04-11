@@ -1,63 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:paddingTop="?attr/actionBarSize"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <ProgressBar
+        android:id="@+id/progressbar_statistics"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"/>
+
+    <ScrollView
+        android:id="@+id/layout_statistics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal">
+        android:visibility="gone">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
+            <!-- 数据概述 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/text_view_tips_flow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="本月已用流量"/>
+                    <TextView
+                        android:id="@+id/text_view_flow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textColor="#000"
+                        tools:text="100M"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/text_view_tips_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="本月已用通话"/>
+                    <TextView
+                        android:id="@+id/text_view_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textColor="#000"
+                        tools:text="100分钟"/>
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 分割线 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@drawable/drawable_line_gray"/>
+
+            <!-- 设备数据流量消耗走势图 -->
             <TextView
-                android:id="@+id/text_view_tips_flow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="本月已用流量"/>
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="16dp"
+                android:textSize="18sp"
+                android:text="流量走势图"/>
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_chart_package"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"/>
+            <!-- 分割线 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@drawable/drawable_line_gray"/>
+
+            <!-- 流量消耗分布饼状图 -->
             <TextView
-                android:id="@+id/text_view_flow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:textColor="#000"
-                android:text="100M"/>
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:textSize="18sp"
+                android:text="流量消耗分布图"/>
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pie_chart_package"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/text_view_tips_call"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="本月已用通话"/>
-            <TextView
-                android:id="@+id/text_view_call"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:textColor="#000"
-                android:text="100分钟"/>
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
-
-    <!-- 设备数据流量消耗走势图 -->
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/line_chart_package"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="24dp"/>
-
-</LinearLayout>
+</FrameLayout>

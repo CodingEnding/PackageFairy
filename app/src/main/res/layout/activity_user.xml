@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <TextView
+        android:id="@+id/text_view_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/UserTextViewStyle"
+        tools:text="codingending"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_line_height"
+        android:background="@drawable/drawable_line_gray"/>
+
+    <TextView
+        android:id="@+id/text_view_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/UserTextViewStyle"
+        tools:text="1109816769@qq.com"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_line_height"
+        android:background="@drawable/drawable_line_gray"/>
+
+    <TextView
+        android:id="@+id/text_view_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/UserTextViewStyle"
+        tools:text="13696238609"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_line_height"
+        android:background="@drawable/drawable_line_gray"/>
+
+    <TextView
+        android:id="@+id/text_view_change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/UserTextViewStyle"
+        android:text="@string/user_change_password"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_line_height"
+        android:background="@drawable/drawable_line_gray"/>
+
+
+</LinearLayout>

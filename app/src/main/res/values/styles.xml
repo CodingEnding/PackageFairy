@@ -8,4 +8,46 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- 对话框风格的Activity -->
+    <style name="DialogTheme" parent="@style/Theme.AppCompat.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/recommend_window_background</item>
+        <item name="colorAccent">@color/recommend_window_accent_color</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <!-- 账户界面的设置项TextView风格 -->
+    <style name="AccountTextViewStyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/account_text_size</item>
+        <item name="android:textColor">@color/account_text</item>
+        <item name="android:paddingLeft">@dimen/account_text_padding_left</item>
+        <item name="android:paddingTop">@dimen/account_text_padding_top</item>
+        <item name="android:paddingBottom">@dimen/account_text_padding_bottom</item>
+    </style>
+
+    <!-- 账户界面的标题项TextView风格 -->
+    <style name="AccountTitleTextViewStyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/account_title_size</item>
+        <item name="android:textColor">@color/account_title_text</item>
+        <item name="android:layout_marginLeft">@dimen/account_title_margin_left</item>
+        <item name="android:layout_marginTop">@dimen/account_title_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/account_title_margin_bottom</item>
+    </style>
+
+    <!-- 用户信息界面的TextView风格 -->
+    <style name="UserTextViewStyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/user_text_size</item>
+        <item name="android:textColor">@color/user_text</item>
+        <item name="android:paddingLeft">@dimen/user_text_padding_left</item>
+        <item name="android:paddingTop">@dimen/user_text_padding_top</item>
+        <item name="android:paddingBottom">@dimen/user_text_padding_bottom</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
 </resources>

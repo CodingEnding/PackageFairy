@@ -35,6 +35,18 @@ public class DateUtils {
         return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
 
+    //获取今日的时间段
+    public static StartEnd getTodayTimePart(){
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,0);
+        calendar.set(Calendar.MINUTE,0);
+        calendar.set(Calendar.SECOND,0);
+        long start=calendar.getTimeInMillis();
+        calendar.add(Calendar.DAY_OF_MONTH,1);
+        long end=calendar.getTimeInMillis();
+        return new StartEnd(start,end);
+    }
+
     //获取从本月第一天到现在的时间段列表
     public static List<StartEnd> getFirstMonthDayToNowTimeList(){
         List<StartEnd> timeList=new ArrayList<>();
