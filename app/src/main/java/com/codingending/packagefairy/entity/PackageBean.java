@@ -1,10 +1,13 @@
 package com.codingending.packagefairy.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * 提供给客户端使用的套餐JSON实体类
  * @author CodingEnding
  */
-public class PackageBean {
+public class PackageBean implements Parcelable{
 	private int id;
 	private String name;
 	private String partner;//合作方
@@ -31,6 +34,84 @@ public class PackageBean {
 	private int abandon;//是否停办
 	private int freeFlowType;//是否有免流范围
 	private double totalConsume;//每月的预计消费
+
+    public PackageBean(){}
+
+    protected PackageBean(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        partner = in.readString();
+        operator = in.readString();
+        monthRent = in.readInt();
+        packageCountryFlow = in.readInt();
+        packageProvinceFlow = in.readInt();
+        packageCall = in.readInt();
+        extraPackageCall = in.readDouble();
+        extraCountryFlow = in.readDouble();
+        extraProvinceFlow = in.readDouble();
+        extraProvinceOutFlow = in.readDouble();
+        extraCountryDayRent = in.readInt();
+        extraCountryDayFlow = in.readInt();
+        extraProvinceInDayRent = in.readInt();
+        extraProvinceInDayFlow = in.readInt();
+        extraProvinceOutDayRent = in.readInt();
+        extraProvinceOutDayFlow = in.readInt();
+        extraFlowType = in.readInt();
+        privilegeDescription = in.readString();
+        star = in.readDouble();
+        url = in.readString();
+        remark = in.readString();
+        abandon = in.readInt();
+        freeFlowType = in.readInt();
+        totalConsume = in.readDouble();
+    }
+
+    public static final Creator<PackageBean> CREATOR = new Creator<PackageBean>() {
+        @Override
+        public PackageBean createFromParcel(Parcel in) {
+            return new PackageBean(in);
+        }
+
+        @Override
+        public PackageBean[] newArray(int size) {
+            return new PackageBean[size];
+        }
+    };
+
+    @Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(partner);
+        dest.writeString(operator);
+        dest.writeInt(monthRent);
+        dest.writeInt(packageCountryFlow);
+        dest.writeInt(packageProvinceFlow);
+        dest.writeInt(packageCall);
+        dest.writeDouble(extraPackageCall);
+        dest.writeDouble(extraCountryFlow);
+        dest.writeDouble(extraProvinceFlow);
+        dest.writeDouble(extraProvinceOutFlow);
+        dest.writeInt(extraCountryDayRent);
+        dest.writeInt(extraCountryDayFlow);
+        dest.writeInt(extraProvinceInDayRent);
+        dest.writeInt(extraProvinceInDayFlow);
+        dest.writeInt(extraProvinceOutDayRent);
+        dest.writeInt(extraProvinceOutDayFlow);
+        dest.writeInt(extraFlowType);
+        dest.writeString(privilegeDescription);
+        dest.writeDouble(star);
+        dest.writeString(url);
+        dest.writeString(remark);
+        dest.writeInt(abandon);
+        dest.writeInt(freeFlowType);
+        dest.writeDouble(totalConsume);
+    }
 	
 	public int getId() {
 		return id;

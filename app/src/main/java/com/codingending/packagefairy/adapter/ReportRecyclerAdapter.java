@@ -1,21 +1,19 @@
 package com.codingending.packagefairy.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.codingending.packagefairy.R;
+import com.codingending.packagefairy.activity.PackageDetailActivity;
 import com.codingending.packagefairy.entity.ExtraFlowType;
 import com.codingending.packagefairy.entity.PackageBean;
 
@@ -30,11 +28,16 @@ public class ReportRecyclerAdapter extends RecyclerView.Adapter<ReportRecyclerAd
     private List<PackageBean> dataList;//数据源
     private Context context;
     private LayoutInflater inflater;//布局解析器
+    private OnAdapterItemClickListener itemClickListener;//点击监听器
 
     public ReportRecyclerAdapter(List<PackageBean> dataList,Context context) {
         this.context=context;
         this.dataList = dataList;
         inflater=LayoutInflater.from(context);
+    }
+
+    public void setOnAdapterItemClickListener(OnAdapterItemClickListener onAdapterItemClickListener) {
+        this.itemClickListener = onAdapterItemClickListener;
     }
 
     @Override
@@ -45,7 +48,7 @@ public class ReportRecyclerAdapter extends RecyclerView.Adapter<ReportRecyclerAd
 
     @Override
     public void onBindViewHolder(ReportRecyclerAdapter.ViewHolder holder, int position) {
-        PackageBean packageBean=dataList.get(position);
+        final PackageBean packageBean=dataList.get(position);
         holder.packageNameView.setText(packageBean.getName());
         holder.packagePartnerView.setText(packageBean.getPartner());
         holder.packageOperatorView.setText(packageBean.getOperator());
@@ -62,6 +65,29 @@ public class ReportRecyclerAdapter extends RecyclerView.Adapter<ReportRecyclerAd
 
         //处理套餐外流量计费方式的显示数据
         bindExtraTypeView(holder.extraFlowTypeView,packageBean);
+
+        bindListener(holder.itemView,packageBean);//设置监听器
+    }
+
+    //设置监听器
+    private void bindListener(View itemView,final PackageBean packageBean){
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemClickListener!=null){
+                    itemClickListener.onItemClick(packageBean);
+                }
+            }
+        });
+        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(itemClickListener!=null){
+                    itemClickListener.onItemLongClick(packageBean);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -112,6 +138,12 @@ public class ReportRecyclerAdapter extends RecyclerView.Adapter<ReportRecyclerAd
                 break;
             default:break;
         }
+    }
+
+    //提供给Adapter使用的监听器接口
+    public interface OnAdapterItemClickListener {
+        void onItemClick(PackageBean packageBean);
+        void onItemLongClick(PackageBean packageBean);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{

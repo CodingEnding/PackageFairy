@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.Nullable;
 
 import com.codingending.packagefairy.database.PackageSQLiteOpenHelper;
 import com.codingending.packagefairy.entity.UserConsume;
@@ -21,6 +22,7 @@ import java.util.List;
 
 public class DBUtils {
     public static final int TOP_APP_COUNT=5;//需要统计的前N个App的数量
+    public static final int RECOMMEND_APP_COUNT=10;//需要作为推荐依据的App的数量
 
     private DBUtils(){}
 
@@ -154,8 +156,11 @@ public class DBUtils {
         database.endTransaction();
     }
 
-    //获取从本月的应用流量消耗情况（每种应用本月的流量总消耗）[只获取Top-5]
-    public static List<FlowConsumePO> getMonthAppConsumeList(SQLiteDatabase database){
+    /**
+     * 获取从本月第一天到现在的应用流量消耗情况（每种应用本月的流量总消耗）
+     * @param limit 需要的数据条数
+     */
+    public static List<FlowConsumePO> getMonthAppConsumeList(SQLiteDatabase database,int limit){
         List<FlowConsumePO> flowConsumePOList=new ArrayList<>();
 
         Calendar calendar=Calendar.getInstance();
@@ -164,7 +169,7 @@ public class DBUtils {
 
         Cursor cursor=database.query(PackageSQLiteOpenHelper.TABLE_NAME_FLOW_CONSUME,new String[]{"month","year","app_name","sum(flow_amount)"},
                 "month=? and year=?",new String[]{String.valueOf(month),String.valueOf(year)},
-                "app_name",null,"sum(flow_amount) DESC",String.valueOf(TOP_APP_COUNT));//按照app_name降序排列
+                "app_name",null,"sum(flow_amount) DESC",String.valueOf(limit));//按照流量消耗量降序排列
         if(cursor.moveToFirst()){
             do{
                 FlowConsumePO flowConsumePO=new FlowConsumePO();
@@ -178,6 +183,27 @@ public class DBUtils {
         }
         cursor.close();//关闭资源
         return flowConsumePOList;
+    }
+
+    //获取本月流量/通话总消耗
+    public static @Nullable UserConsumePO getMonthTotalUserFlow(SQLiteDatabase database){
+        Calendar calendar=Calendar.getInstance();
+        int month= calendar.get(Calendar.MONTH)+1;//Month字段为0-11
+        int year= calendar.get(Calendar.YEAR);//year字段
+
+        Cursor cursor=database.query(PackageSQLiteOpenHelper.TABLE_NAME_USER_CONSUME,new String[]{"month","year",
+                "sum(flow_all)","sum(call_time)","count(day)"},"month=? and year=?",new String[]{String.valueOf(month),String.valueOf(year)},
+                null,null,null,null);
+        UserConsumePO userConsumePO=null;
+        if(cursor.moveToFirst()){
+            userConsumePO=new UserConsumePO();
+            userConsumePO.setMonth(cursor.getInt(0));
+            userConsumePO.setYear(cursor.getInt(1));
+            userConsumePO.setAllFlow(cursor.getInt(2));//M
+            userConsumePO.setCallTime(cursor.getInt(3));
+            userConsumePO.setDay(cursor.getInt(4));//注意：此时的day属性就是本月存在数据的天数
+        }
+        return userConsumePO;
     }
 
 }

@@ -3,6 +3,7 @@ package com.codingending.packagefairy.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,12 +18,16 @@ import android.widget.TextView;
 
 import com.codingending.packagefairy.MainActivity;
 import com.codingending.packagefairy.R;
+import com.codingending.packagefairy.activity.PackageDetailActivity;
 import com.codingending.packagefairy.activity.RecommendActivity;
 import com.codingending.packagefairy.adapter.ReportRecyclerAdapter;
 import com.codingending.packagefairy.api.PackageService;
 import com.codingending.packagefairy.entity.DataResponse;
+import com.codingending.packagefairy.entity.FlowConsume;
 import com.codingending.packagefairy.entity.PackageBean;
 import com.codingending.packagefairy.entity.UserConsume;
+import com.codingending.packagefairy.po.FlowConsumePO;
+import com.codingending.packagefairy.utils.DBUtils;
 import com.codingending.packagefairy.utils.LogUtils;
 import com.codingending.packagefairy.utils.PreferenceUtils;
 import com.codingending.packagefairy.utils.RetrofitUtils;
@@ -52,6 +57,8 @@ public class ReportFragment extends BaseFragment{
     private ReportRecyclerAdapter reportRecyclerAdapter;
     private LinearLayoutManager linearLayoutManager;//布局管理器
 
+    private SQLiteDatabase database;//数据库实例
+
     /**
      * 返回实例
      */
@@ -71,6 +78,12 @@ public class ReportFragment extends BaseFragment{
         args.putAll(bundle);//添加新数据
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initDatabase();//初始化 数据库
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,6 +93,14 @@ public class ReportFragment extends BaseFragment{
         initViews(view);
         initRecyclerView();
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        if(database!=null){
+            database.close();//关闭数据库
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -97,6 +118,14 @@ public class ReportFragment extends BaseFragment{
         if(dataList!=null&&dataList.isEmpty()){//此时未点击推荐按钮但是当前界面已经处于可见状态（因此如果此时还没有加载数据就对数据进行加载）
             loadRecommendData();
         }
+    }
+
+    //初始化数据库
+    private void initDatabase(){
+        if(database!=null){
+            database.close();
+        }
+        database=DBUtils.getDatabase(getActivity());
     }
 
 
@@ -137,6 +166,18 @@ public class ReportFragment extends BaseFragment{
         String deviceType= PreferenceUtils.getString(getActivity(),PreferenceUtils.KEY_DEVICE_TYPE);
         String systemVersion= PreferenceUtils.getString(getActivity(),PreferenceUtils.KEY_SYSTEM_VERSION);
         String deviceFinger= PreferenceUtils.getString(getActivity(),PreferenceUtils.KEY_DEVICE_FINGER);
+
+        LogUtils.i(TAG,"recommendMode："+recommendMode);
+
+        //获取本月每种应用的流量消耗
+        List<FlowConsume> flowConsumeList=null;
+        if(recommendMode== UserConsume.RECOMMEND_MODE_ADVANCED){//在精准推荐的情况下才获取本月每种应用的流量消耗
+            flowConsumeList=new ArrayList<>();
+            List<FlowConsumePO> flowConsumePOList=DBUtils.getMonthAppConsumeList(database,DBUtils.RECOMMEND_APP_COUNT);
+            for(FlowConsumePO temp:flowConsumePOList){//将FlowConsumePO转化为FlowConsume
+                flowConsumeList.add(FlowConsume.build(temp));
+            }
+        }
 
         //构造用户消费数据实例
         UserConsume userConsume=new UserConsume(callTime,flow,provinceOutDay,deviceType,
@@ -197,6 +238,16 @@ public class ReportFragment extends BaseFragment{
         reportRecyclerView.setLayoutManager(linearLayoutManager);
         reportRecyclerView.setAdapter(reportRecyclerAdapter);
         reportRecyclerView.setNestedScrollingEnabled(false);//解决嵌套滑动卡顿的问题
+
+        reportRecyclerAdapter.setOnAdapterItemClickListener(new ReportRecyclerAdapter.OnAdapterItemClickListener() {
+            @Override
+            public void onItemClick(PackageBean packageBean) {
+                PackageDetailActivity.actionStart(getActivity(),packageBean);//跳转到详情界面
+            }
+            @Override
+            public void onItemLongClick(PackageBean packageBean) {
+            }
+        });
     }
 
     @Override

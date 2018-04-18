@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:background="?attr/colorPrimary"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            app:cardCornerRadius="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:id="@+id/text_view_package_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:textSize="24sp"
+                        android:textColor="@color/package_detail_text"
+                        tools:text="大王卡"/>
+                    <TextView
+                        android:id="@+id/text_view_start"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:textColor="@color/package_detail_star_text"
+                        android:textSize="20sp"
+                        android:gravity="end"
+                        tools:text="8.0分"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp">
+                    <TextView
+                        android:id="@+id/text_view_partner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:textColor="@color/package_detail_tips_text"
+                        android:textSize="16sp"
+                        tools:text="阿里巴巴"/>
+                    <TextView
+                        android:id="@+id/text_view_operator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:textColor="@color/package_detail_tips_text"
+                        android:textSize="16sp"
+                        tools:text="中国联通"/>
+                    <TextView
+                        android:id="@+id/text_view_month_rent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:textColor="@color/package_detail_text"
+                        android:textSize="18sp"
+                        android:gravity="end"
+                        tools:text="月租19元"/>
+                </LinearLayout>
+
+                <include layout="@layout/divider_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/package_detail_tips_text"
+                        android:textSize="17sp"
+                        android:text="套餐内通话"/>
+                    <TextView
+                        android:id="@+id/text_view_package_calltime"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:textColor="@color/package_detail_text"
+                        android:textSize="18sp"
+                        tools:text="100分钟"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/package_detail_tips_text"
+                        android:textSize="17sp"
+                        android:text="套餐外通话"/>
+                    <TextView
+                        android:id="@+id/text_view_extra_package_call"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textColor="@color/package_detail_text"
+                        android:textSize="18sp"
+                        tools:text="0.1元/分钟"/>
+                </LinearLayout>
+
+                <include layout="@layout/divider_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/package_detail_tips_text"
+                        android:textSize="17sp"
+                        android:text="套餐内流量"/>
+                    <TextView
+                        android:id="@+id/text_view_package_flow"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textColor="@color/package_detail_text"
+                        android:textSize="18sp"
+                        tools:text="省内500M 省外1GB"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/package_detail_tips_text"
+                        android:textSize="17sp"
+                        android:text="套餐外流量"/>
+                    <TextView
+                        android:id="@+id/text_view_extra_package_flow"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:textColor="@color/package_detail_text"
+                        android:textSize="18sp"
+                        android:lineSpacingMultiplier="1.3"
+                        tools:text="全国日租1元1GB"/>
+                </LinearLayout>
+
+                <include layout="@layout/divider_line"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/package_detail_tips_text"
+                    android:textSize="18sp"
+                    android:text="特权"/>
+
+                <TextView
+                    android:id="@+id/text_view_package_free_flow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginRight="16dp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:textSize="16sp"
+                    android:textColor="@color/package_detail_privilege"
+                    tools:text="指定App免流" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</ScrollView>

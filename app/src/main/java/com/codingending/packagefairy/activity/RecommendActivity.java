@@ -1,6 +1,7 @@
 package com.codingending.packagefairy.activity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +12,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.codingending.packagefairy.R;
+import com.codingending.packagefairy.po.UserConsumePO;
+import com.codingending.packagefairy.utils.DBUtils;
+import com.codingending.packagefairy.utils.LogUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -46,17 +51,63 @@ public class RecommendActivity extends BaseActivity {
     public static final String KEY_RECOMMEND_MODE="recommend_mode";
     public static final String KEY_OPERATORS="operators";
 
+    private SQLiteDatabase database;//SQLiteDatabase实例
+    public static final int MONTH_DAY_COUNT=30;//默认每个月是30天（方便计算）
+    public static final double DEFAULT_FLOW=0.8;//默认本月流量消耗（0.8G）
+    public static final int DEFAULT_CALL_TIME=60;//默认本月通话时长（60min）
+    public static final int DEFAULT_PROVINCE_OUT=0;//默认每月在省外的天数（0天）
+    public static final double MAX_FLOW=15;//本月预测流量的最大值（15G）
+    public static final int MAX_CALL_TIME=500;//本月预测通话时长的最大值（500min）
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
+        initDatabase();
         initData();
         initViews();
+        loadData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(database!=null){
+            database.close();//关闭数据库
+        }
+        super.onDestroy();
+    }
+
+    //初始化数据库
+    private void initDatabase(){
+        if(database!=null){
+            database.close();
+        }
+        database= DBUtils.getDatabase(this);
     }
 
     //初始化数据
     private void initData(){
         operatorSet.add(operatorArray[0]);//添加默认运营商-保证在不点击复选框的情况下也有运营商数据
+    }
+
+    //从数据库中加载历史消耗数据
+    private void loadData(){
+        UserConsumePO userConsumePO=DBUtils.getMonthTotalUserFlow(database);
+        double totalFlow=DEFAULT_FLOW;
+        int totalCallTime=DEFAULT_CALL_TIME;
+//        LogUtils.i(TAG,userConsumePO.getDay()+" "+userConsumePO.getAllFlow()+" "+userConsumePO.getCallTime());
+        if(userConsumePO!=null&&userConsumePO.getDay()<MONTH_DAY_COUNT){//如果当前本月统计的天数还不足一个月，就简单预测出本月的消耗
+            int dayCount=userConsumePO.getDay();//本月具有数据统计的天数
+            totalCallTime=userConsumePO.getCallTime()*MONTH_DAY_COUNT/dayCount;//根据平均值预测本月的通话时长
+            totalCallTime=Math.min(totalCallTime,MAX_CALL_TIME);//MAX_CALL_TIME限制预测值的最大值
+            totalFlow=userConsumePO.getAllFlow()*MONTH_DAY_COUNT/dayCount/1024.0;//根据平均值预测本月的流量消耗（G）
+            totalFlow=Math.min(totalFlow,MAX_FLOW);//MAX_FLOW限制预测值的最大值
+        }
+        //为控件设置值
+        DecimalFormat decimalFormat=new DecimalFormat("0.00");//小数保留两位
+        flowEditText.setText(String.valueOf(decimalFormat.format(totalFlow)));
+        callTimeEditText.setText(String.valueOf(totalCallTime));
+        provinceOutEditText.setText(String.valueOf(DEFAULT_PROVINCE_OUT));
     }
 
     @Override

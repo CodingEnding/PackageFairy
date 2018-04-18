@@ -43,7 +43,7 @@
                 android:maxLines="1"
                 android:maxLength="5"
                 android:digits="0123456789."
-                android:text="0.8"
+                tools:text="0.8"
                 android:textSize="@dimen/recommend_text_size"
                 android:textColor="@color/recommend_window_text"/>
         </LinearLayout>
@@ -67,7 +67,7 @@
                 android:maxLines="1"
                 android:maxLength="4"
                 android:digits="0123456789"
-                android:text="100"
+                tools:text="60"
                 android:textSize="@dimen/recommend_text_size"
                 android:textColor="@color/recommend_window_text"/>
         </LinearLayout>
@@ -88,7 +88,7 @@
                 android:id="@+id/edit_text_province_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
+                tools:text="0"
                 android:maxLines="1"
                 android:maxLength="2"
                 android:digits="0123456789"

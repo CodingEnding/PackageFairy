@@ -28,11 +28,16 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter<FindRecyclerAdapte
     private List<SimplePackageBean> dataList;//数据源
     private Context context;
     private LayoutInflater inflater;//布局解析器
+    private OnAdapterItemClickListener itemClickListener;//点击监听器
 
     public FindRecyclerAdapter(List<SimplePackageBean> dataList, Context context) {
         this.context=context;
         this.dataList = dataList;
         inflater=LayoutInflater.from(context);
+    }
+
+    public void setOnAdapterItemClickListener(OnAdapterItemClickListener onAdapterItemClickListener) {
+        this.itemClickListener = onAdapterItemClickListener;
     }
 
     @Override
@@ -57,18 +62,46 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter<FindRecyclerAdapte
         holder.monthRentView.setText(context.getString(R.string.find_package_month_rent,
                 packageBean.getMonthRent()));//设置月租
 
+        bindListener(holder.itemView,packageBean);//设置监听器
+
 //        if(packageBean.getFreeFlowType()==1){//存在免流应用信息
 //            holder.freeFlowView.setVisibility(View.VISIBLE);
 //            holder.freeFlowView.setText(context.getString(R.string.report_free_flow));
 //        }else{
 //            holder.freeFlowView.setVisibility(View.GONE);
 //        }
+    }
 
+    //设置监听器
+    private void bindListener(View itemView,final SimplePackageBean packageBean){
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemClickListener!=null){
+                    itemClickListener.onItemClick(packageBean);
+                }
+            }
+        });
+        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(itemClickListener!=null){
+                    itemClickListener.onItemLongClick(packageBean);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    //提供给Adapter使用的监听器接口
+    public interface OnAdapterItemClickListener {
+        void onItemClick(SimplePackageBean packageBean);
+        void onItemLongClick(SimplePackageBean packageBean);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{

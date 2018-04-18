@@ -13,6 +13,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * 提供套餐相关的服务
@@ -29,5 +30,9 @@ public interface PackageService {
     @GET("v1/package/hot")
     //获取热门套餐列表
     Call<DataResponse<List<SimplePackageBean>>> getHotPackage();
+
+    @GET("v1/package/get")
+    //获取指定Id的套餐
+    Call<DataResponse<PackageBean>> getPackageById(@Query("package_id") int packageId);
 
 }

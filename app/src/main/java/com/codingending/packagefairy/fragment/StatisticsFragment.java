@@ -205,7 +205,7 @@ public class StatisticsFragment extends BaseFragment{
 
         //为流量消耗饼状图绑定数据
         List<PieEntry> pieEntryList = new ArrayList<>();//饼状图需要的数据源
-        List<FlowConsumePO> flowConsumePOList=DBUtils.getMonthAppConsumeList(database);
+        List<FlowConsumePO> flowConsumePOList=DBUtils.getMonthAppConsumeList(database,DBUtils.TOP_APP_COUNT);//这里只获取Top-5
         for(FlowConsumePO flowConsumePO:flowConsumePOList){
             PieEntry pieEntry=new PieEntry(flowConsumePO.getFlowAmount()/1024,flowConsumePO.getAppName());
             pieEntryList.add(pieEntry);

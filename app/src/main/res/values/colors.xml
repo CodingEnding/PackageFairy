@@ -67,6 +67,19 @@
     <!-- 预计消费金额文字颜色 -->
     <color name="report_consume_text">#fb8c00</color>
 
+    <!--*************套餐详情界面相关的颜色************-->
+    <!-- 主文字颜色 -->
+    <color name="package_detail_text">#212121</color>
+    <!--提示文字颜色-->
+    <color name="package_detail_tips_text">#424242</color>
+    <!-- 特权说明文字颜色 -->
+    <color name="package_detail_privilege">#2baf2b</color>
+    <!--<color name="package_detail_month_rent">#fb8c00</color>-->
+    <color name="package_detail_month_rent">#2baf2b</color>
+    <!-- 套餐评分文字颜色 -->
+    <!--<color name="package_detail_star_text">#ef6c00</color>-->
+    <color name="package_detail_star_text">#fb8c00</color>
+
     <!-- *************账户界面相关的颜色************ -->
     <!-- 标题文字颜色 -->
     <color name="account_title_text">#E51C23</color>

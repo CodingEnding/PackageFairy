@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codingending.packagefairy.R;
+import com.codingending.packagefairy.activity.PackageDetailActivity;
 import com.codingending.packagefairy.adapter.FindRecyclerAdapter;
 import com.codingending.packagefairy.api.PackageService;
 import com.codingending.packagefairy.entity.DataResponse;
@@ -108,6 +109,16 @@ public class FindFragment extends BaseFragment{
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setNestedScrollingEnabled(false);//防止嵌套卡顿
+
+        recyclerAdapter.setOnAdapterItemClickListener(new FindRecyclerAdapter.OnAdapterItemClickListener() {
+            @Override
+            public void onItemClick(SimplePackageBean packageBean) {
+                PackageDetailActivity.actionStart(getActivity(),packageBean.getId());//跳转到详情界面
+            }
+            @Override
+            public void onItemLongClick(SimplePackageBean packageBean) {
+            }
+        });
     }
 
     @Override

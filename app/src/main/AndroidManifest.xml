@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 运行时权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <!-- 该权限需要引导用户主动开启 -->
@@ -40,8 +40,11 @@
         <activity
             android:name=".activity.UserActivity"
             android:label="@string/activity_user" />
-        <activity android:name=".activity.LoginActivity"
-            android:label="@string/activity_login"></activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/activity_login" />
+        <activity android:name=".activity.PackageDetailActivity"
+            android:label="@string/activity_package_detail"/>
     </application>
 
 </manifest>
