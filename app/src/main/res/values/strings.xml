@@ -7,6 +7,7 @@
     <string name="navigation_item_find">发现</string>
     <string name="navigation_item_report">推荐报告</string>
     <string name="navigation_item_account">账户</string>
+    <string name="menu_search_text">搜索</string>
 
     <string name="report_free_flow">指定App免流</string>
     <string name="report_extra_type_one">全国流量%d元/GB</string>

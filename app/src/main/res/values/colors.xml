@@ -50,6 +50,21 @@
     <color name="find_free_flow_text">#2baf2b</color>
     <!-- 月租文字颜色 -->
     <color name="find_month_rent_text">#2baf2b</color>
+    <!-- 热门套餐卡片的背景色 -->
+    <color name="find_card_background_one">#D9e91463</color>
+    <color name="find_card_background_two">#E6ffb74d</color>
+    <color name="find_card_background_three">#D9259b24</color>
+    <color name="find_card_background_four">#D99c27b0</color>
+    <color name="find_card_background_five">#BF4a148c</color>
+    <color name="find_card_background_six">#E6c0ca33</color>
+    <color name="find_card_background_seven">#D9e84e40</color>
+
+    <color name="category_background_one">#E6e91463</color>
+    <color name="category_background_two">#E6ffb74d</color>
+    <color name="category_background_three">#E6259b24</color>
+    <color name="category_background_four">#E69c27b0</color>
+    <color name="category_background_five">#E64a148c</color>
+    <color name="category_background_six">#E6880e4f</color>
 
     <!-- *************套餐推荐结果界面相关的颜色************ -->
     <!--主文字颜色-->

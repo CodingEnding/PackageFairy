@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="package_category">
+        <item>运营商</item>
+        <item>合作方</item>
+        <item>日租卡</item>
+        <item>免流特权</item>
+        <item>无限流量</item>
+        <item>全部</item>
+    </string-array>
+</resources>

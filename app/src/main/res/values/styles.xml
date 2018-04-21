@@ -50,4 +50,18 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
+    <!-- 前景水波纹风格 -->
+    <style name="ForegroundRippleStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <!-- 背景水波纹风格 -->
+    <style name="BackgroundRippleStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
 </resources>

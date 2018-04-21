@@ -2,8 +2,11 @@
 <resources>
     <!-- 底部分割线的高度 -->
     <dimen name="bottom_line_height">2px</dimen>
-
     <dimen name="flow_window_text_size">12sp</dimen>
+
+    <!--***************发现界面******************-->
+    <dimen name="category_card_radius">6dp</dimen>
+
 
     <!--  ****************与推荐弹窗相关的属性**************  -->
     <!-- 推荐弹窗提示文字的大小 -->

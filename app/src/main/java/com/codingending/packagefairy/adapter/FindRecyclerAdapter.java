@@ -2,22 +2,18 @@ package com.codingending.packagefairy.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.codingending.packagefairy.R;
-import com.codingending.packagefairy.entity.ExtraFlowType;
-import com.codingending.packagefairy.entity.PackageBean;
 import com.codingending.packagefairy.entity.SimplePackageBean;
+import com.codingending.packagefairy.utils.FormatUtils;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * 发现界面列表的Adapter
@@ -29,6 +25,9 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter<FindRecyclerAdapte
     private Context context;
     private LayoutInflater inflater;//布局解析器
     private OnAdapterItemClickListener itemClickListener;//点击监听器
+    private int[] colorIdArray={R.color.find_card_background_one,R.color.find_card_background_two,
+            R.color.find_card_background_three,R.color.find_card_background_four,R.color.find_card_background_five,
+            R.color.find_card_background_six,R.color.find_card_background_seven};//存储预设的颜色Id
 
     public FindRecyclerAdapter(List<SimplePackageBean> dataList, Context context) {
         this.context=context;
@@ -42,7 +41,8 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter<FindRecyclerAdapte
 
     @Override
     public FindRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.list_item_find,parent,false);
+//        View view=inflater.inflate(R.layout.list_item_find,parent,false);
+        View view=inflater.inflate(R.layout.list_item_find_grid,parent,false);
         return new ViewHolder(view);
     }
 
@@ -50,7 +50,10 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter<FindRecyclerAdapte
     public void onBindViewHolder(FindRecyclerAdapter.ViewHolder holder, int position) {
         SimplePackageBean packageBean=dataList.get(position);
         holder.packageNameView.setText(packageBean.getName());
-        holder.packagePartnerView.setText(packageBean.getPartner());
+
+        //如果合作方包含空格就默认只使用空格后的后缀（如“阿里巴巴 钉钉”就返回“钉钉”）
+        String partner=packageBean.getPartner();
+        holder.packagePartnerView.setText(FormatUtils.getSpacePostfix(partner));
 
         if(Double.compare(packageBean.getStar(),0.0)==0){//如果评分为0就显示特殊的提示信息
             holder.packageStarView.setText(context.getString(R.string.find_package_no_star));
@@ -63,6 +66,10 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter<FindRecyclerAdapte
                 packageBean.getMonthRent()));//设置月租
 
         bindListener(holder.itemView,packageBean);//设置监听器
+
+        //随机设置顶部区域的背景色
+        int randNum=new Random().nextInt(50);
+        holder.topLayout.setBackgroundResource(colorIdArray[randNum%colorIdArray.length]);
 
 //        if(packageBean.getFreeFlowType()==1){//存在免流应用信息
 //            holder.freeFlowView.setVisibility(View.VISIBLE);
@@ -105,6 +112,7 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter<FindRecyclerAdapte
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
+        LinearLayout topLayout;
         TextView packageNameView;
         TextView packagePartnerView;
 //        TextView freeFlowView;//免流应用说明
@@ -113,6 +121,7 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter<FindRecyclerAdapte
 
         public ViewHolder(View itemView) {
             super(itemView);
+            topLayout= (LinearLayout) itemView.findViewById(R.id.layout_top_area);
             packageNameView= (TextView) itemView.findViewById(R.id.text_view_package_name);
             packagePartnerView= (TextView) itemView.findViewById(R.id.text_view_package_partner);
 //            freeFlowView= (TextView) itemView.findViewById(R.id.text_view_package_free_flow);
