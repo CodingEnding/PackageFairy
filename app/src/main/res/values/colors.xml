@@ -101,6 +101,7 @@
     <!--主文字颜色-->
     <color name="account_text">#EF212121</color>
     <color name="user_text">#EF212121</color>
+    <color name="device_type_text">#212121</color>
 
     <!-- ************登录/注册********** -->
     <color name="login_btn_normal">#E84E40</color>

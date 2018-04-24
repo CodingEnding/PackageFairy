@@ -5,9 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingending.packagefairy.R;
-import com.codingending.packagefairy.activity.LoginActivity;
-import com.codingending.packagefairy.activity.UserActivity;
+import com.codingending.packagefairy.activity.account.AboutActivity;
+import com.codingending.packagefairy.activity.account.BackupActivity;
+import com.codingending.packagefairy.activity.account.DeviceActivity;
+import com.codingending.packagefairy.activity.account.LibraryActivity;
+import com.codingending.packagefairy.activity.account.LoginActivity;
+import com.codingending.packagefairy.activity.account.UserActivity;
+import com.codingending.packagefairy.api.AppService;
 import com.codingending.packagefairy.utils.PreferenceUtils;
+
+import ezy.boost.update.UpdateManager;
 
 /**
  * 账户页面
@@ -45,7 +50,9 @@ public class AccountFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_account,container,false);
+        initUpdateManager();
         initViews(view);
+        updateUserView();//为了优化用户体验提前加载账号数据（这是对首选项的查询所以不会有太大的性能代价）
         return view;
     }
 
@@ -65,6 +72,12 @@ public class AccountFragment extends BaseFragment{
         }
     }
 
+    //初始化版本更新管理工具
+    private void initUpdateManager(){
+        UpdateManager.setUrl(AppService.URL_CHECK_UPDATE,AppService.CHANNEL_DEFAULT);
+        UpdateManager.setWifiOnly(false);//在WIFI和数据流量的状态下都可以检查更新
+    }
+
     @Override
     protected void initViews(View rootView) {
         userView= (TextView) rootView.findViewById(R.id.text_view_user);
@@ -81,8 +94,39 @@ public class AccountFragment extends BaseFragment{
                 if(isLogin()){
                     startActivity(new Intent(getActivity(),UserActivity.class));//跳转到用户信息界面
                 }else{
-                    startActivity(new Intent(getActivity(), LoginActivity.class));//跳转到登录/注册界面
+                    startActivity(new Intent(getActivity(),LoginActivity.class));//跳转到登录/注册界面
                 }
+            }
+        });
+        backupView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),BackupActivity.class));
+            }
+        });
+        deviceView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),DeviceActivity.class));
+            }
+        });
+        checkUpdateView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),R.string.update_checking_tips,Toast.LENGTH_SHORT).show();
+                UpdateManager.checkManual(getActivity());//检查更新
+            }
+        });
+        libraryView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),LibraryActivity.class));
+            }
+        });
+        aboutView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),AboutActivity.class));
             }
         });
         logoutView.setOnClickListener(new View.OnClickListener() {

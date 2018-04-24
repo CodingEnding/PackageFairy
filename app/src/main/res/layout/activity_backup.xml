@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:divider="@drawable/drawable_line_gray"
+    android:showDividers="middle"
+    tools:context="com.codingending.packagefairy.activity.account.BackupActivity">
+
+    <!-- Toolbar -->
+    <include layout="@layout/layout_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ForegroundRippleStyle"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:text="开启自动同步"/>
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch_auto_backup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"/>
+    </LinearLayout>
+
+   <!-- <LinearLayout
+        android:id="@+id/layout_backup_internal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ForegroundRippleStyle"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:text="同步间隔"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="10min"/>
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/layout_start_backup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ForegroundRippleStyle"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:text="立即同步"/>
+    </LinearLayout>
+
+    <!-- 下方提示文本 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:text="自动同步功能仅需少量流量，建议开启"/>
+
+</LinearLayout>

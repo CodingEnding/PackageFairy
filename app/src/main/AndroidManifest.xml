@@ -4,6 +4,7 @@
     package="com.codingending.packagefairy">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 运行时权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -38,13 +39,24 @@
             android:name=".activity.RecommendActivity"
             android:theme="@style/DialogTheme" />
         <activity
-            android:name=".activity.UserActivity"
+            android:name=".activity.account.UserActivity"
             android:label="@string/activity_user" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.account.LoginActivity"
             android:label="@string/activity_login" />
-        <activity android:name=".activity.PackageDetailActivity"
-            android:label="@string/activity_package_detail"/>
+        <activity
+            android:name=".activity.PackageDetailActivity"
+            android:label="@string/activity_package_detail" />
+        <activity
+            android:name=".activity.account.DeviceActivity"
+            android:label="@string/activity_device" />
+        <activity
+            android:name=".activity.account.BackupActivity"
+            android:label="@string/activity_backup" />
+        <activity android:name=".activity.account.AboutActivity"
+            android:label="@string/activity_about"/>
+        <activity android:name=".activity.account.LibraryActivity"
+            android:label="@string/account_item_library"/>
     </application>
 
 </manifest>

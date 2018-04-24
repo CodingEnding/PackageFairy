@@ -20,11 +20,12 @@ public class PreferenceUtils {
     public static final String KEY_USER_PHONE="user_phone";//存储电话号码
     public static final String KEY_USER_SESSION_TOKEN="user_session_token";//存储SessionToken
     public static final String KEY_EMAIL_VERIFIED="email_verified";//邮箱是否已经验证
+    public static final String KEY_AUTO_BACKUP="auto_backup";//是否允许自动同步数据
 
     private PreferenceUtils(){}
 
     //返回一个SharedPreferences实例
-    public static SharedPreferences getPreference(Context context){
+    private static SharedPreferences getPreference(Context context){
         return context.getSharedPreferences(PREFERENCE_FAIRY,Context.MODE_PRIVATE);
     }
 
@@ -51,6 +52,16 @@ public class PreferenceUtils {
     //获取int类型的数据
     public static int getInt(Context context,String key){
         return getPreference(context).getInt(key,0);
+    }
+
+    //存储boolean类型的数据
+    public static void putBoolean(Context context,String key,boolean value){
+        getPreference(context).edit().putBoolean(key,value).apply();
+    }
+
+    //获取boolean类型的数据
+    public static boolean getBoolean(Context context,String key){
+        return getPreference(context).getBoolean(key,false);
     }
 
     //清除指定信息

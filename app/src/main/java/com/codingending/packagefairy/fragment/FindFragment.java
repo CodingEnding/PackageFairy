@@ -90,7 +90,7 @@ public class FindFragment extends BaseFragment{
                 if(response.isSuccessful()){
                     DataResponse<List<SimplePackageBean>> body=response.body();
                     if(body!=null){
-                        List<SimplePackageBean> packageBeanList=response.body().getData();
+                        List<SimplePackageBean> packageBeanList=body.getData();
                         if(packageBeanList!=null){
                             dataList.clear();
                             dataList.addAll(packageBeanList);

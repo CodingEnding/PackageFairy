@@ -22,12 +22,15 @@ import android.widget.Toast;
 import com.codingending.packagefairy.activity.BaseActivity;
 import com.codingending.packagefairy.activity.RecommendActivity;
 import com.codingending.packagefairy.adapter.NavigationFragmentAdapter;
+import com.codingending.packagefairy.api.AppService;
 import com.codingending.packagefairy.fragment.ReportFragment;
 import com.codingending.packagefairy.utils.DeviceUtils;
 import com.codingending.packagefairy.utils.LogUtils;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
+
+import ezy.boost.update.UpdateManager;
 
 /**
  * 主页面布局
@@ -58,6 +61,14 @@ public class MainActivity extends BaseActivity {
         initToolbar();
         initViewPager();
         initBottomNavigation(savedInstanceState);
+        checkUpdate();
+    }
+
+    //自动检查是否有新的应用版本
+    private void checkUpdate(){
+        UpdateManager.setUrl(AppService.URL_CHECK_UPDATE,AppService.CHANNEL_DEFAULT);
+        UpdateManager.setWifiOnly(false);
+        UpdateManager.check(this);
     }
 
     @Override

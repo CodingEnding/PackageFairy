@@ -1,4 +1,4 @@
-package com.codingending.packagefairy.activity;
+package com.codingending.packagefairy.activity.account;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.codingending.packagefairy.R;
+import com.codingending.packagefairy.activity.BaseActivity;
 import com.codingending.packagefairy.utils.PreferenceUtils;
 
 public class UserActivity extends BaseActivity {

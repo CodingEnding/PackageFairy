@@ -1,4 +1,4 @@
-package com.codingending.packagefairy.activity;
+package com.codingending.packagefairy.activity.account;
 
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingending.packagefairy.R;
+import com.codingending.packagefairy.activity.BaseActivity;
 import com.codingending.packagefairy.api.UserService;
 import com.codingending.packagefairy.entity.DataResponse;
 import com.codingending.packagefairy.entity.UserBean;
@@ -30,7 +31,7 @@ import retrofit2.Response;
  * @author CodingEnding
  */
 public class LoginActivity extends BaseActivity {
-    public static final String TAG="LoginActivity";
+    private static final String TAG="LoginActivity";
     private Toolbar toolbar;
     private EditText userNameEditText;
     private EditText emailEditText;
@@ -185,7 +186,7 @@ public class LoginActivity extends BaseActivity {
         String password=passwordEditText.getText().toString();
         password=EncryptUtils.sha256String(password);//对密码进行SHA-256加密
         String deviceType= PreferenceUtils.getString(this,PreferenceUtils.KEY_DEVICE_TYPE);
-        String systemVersion= PreferenceUtils.getString(this,PreferenceUtils.KEY_DEVICE_TYPE);
+        String systemVersion= PreferenceUtils.getString(this,PreferenceUtils.KEY_SYSTEM_VERSION);
         String deviceFinger=PreferenceUtils.getString(this,PreferenceUtils.KEY_DEVICE_FINGER);
 
         Call<DataResponse<UserBean>> call=RetrofitUtils.getRetrofit()

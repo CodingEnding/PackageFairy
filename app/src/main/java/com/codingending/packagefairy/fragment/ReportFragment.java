@@ -106,7 +106,7 @@ public class ReportFragment extends BaseFragment{
     @Override
     public void onResume() {
         super.onResume();
-        if(getUserVisibleHint()){//如果当前界面对用户可见才刷新数据
+        if(getUserVisibleHint()&&dataList!=null&&dataList.isEmpty()){//如果当前界面对用户可见且无数据就加载数据
             loadRecommendData();
         }
     }
@@ -115,7 +115,7 @@ public class ReportFragment extends BaseFragment{
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(dataList!=null&&dataList.isEmpty()){//此时未点击推荐按钮但是当前界面已经处于可见状态（因此如果此时还没有加载数据就对数据进行加载）
+        if(isVisibleToUser&&dataList!=null&&dataList.isEmpty()){//此时未点击推荐按钮但是当前界面已经处于可见状态（因此如果此时还没有加载数据就对数据进行加载）
             loadRecommendData();
         }
     }
@@ -193,7 +193,7 @@ public class ReportFragment extends BaseFragment{
                 if(response.isSuccessful()){
                     DataResponse<List<PackageBean>> body=response.body();
                     if(body!=null){
-                        List<PackageBean> packageBeanList=response.body().getData();
+                        List<PackageBean> packageBeanList=body.getData();
                         if(packageBeanList!=null){
                             dataList.clear();
                             dataList.addAll(packageBeanList);
