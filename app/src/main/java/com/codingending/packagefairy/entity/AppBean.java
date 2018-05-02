@@ -11,7 +11,7 @@ import com.codingending.packagefairy.po.FlowConsumePO;
 public class AppBean {
     private String appName;
     private String packageName;//包名
-    private int flowAmount;//流量消耗
+    private int flowAmount;//流量消耗（KB）
     private Drawable appIcon;//图标
 
     /**

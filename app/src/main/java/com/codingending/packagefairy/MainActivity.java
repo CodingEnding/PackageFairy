@@ -1,19 +1,9 @@
 package com.codingending.packagefairy;
 
-import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.AppOpsManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,10 +11,9 @@ import android.widget.Toast;
 
 import com.codingending.packagefairy.activity.BaseActivity;
 import com.codingending.packagefairy.activity.RecommendActivity;
+import com.codingending.packagefairy.activity.SearchActivity;
 import com.codingending.packagefairy.adapter.NavigationFragmentAdapter;
 import com.codingending.packagefairy.api.AppService;
-import com.codingending.packagefairy.fragment.ReportFragment;
-import com.codingending.packagefairy.utils.DeviceUtils;
 import com.codingending.packagefairy.utils.LogUtils;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
@@ -37,7 +26,7 @@ import ezy.boost.update.UpdateManager;
  * @author CodingEnding
  */
 public class MainActivity extends BaseActivity {
-    public static final String TAG="MainActivity";
+    private static final String TAG="MainActivity";
     public static final int INDEX_STATISTICS=0;//底部导航的统计按钮
     public static final int INDEX_FIND=1;//底部导航的发现按钮
     public static final int INDEX_REPORT=2;//底部导航的推荐报告按钮
@@ -79,7 +68,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initToolbar() {
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);//由于主Activity并没有返回图标，所以重写该方法
     }
 
     //初始化ViewPager
@@ -155,7 +144,7 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_search:
-                Toast.makeText(MainActivity.this,"Search",Toast.LENGTH_SHORT).show();
+                SearchActivity.actionStart(MainActivity.this);//进入搜索界面
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -167,6 +156,11 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView= (SpaceNavigationView) findViewById(R.id.navigation_bottom);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         viewPager= (ViewPager) findViewById(R.id.viewpager);
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return null;//在主Activity中用不到这个方法
     }
 
     @Override

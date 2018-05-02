@@ -31,4 +31,27 @@
     <dimen name="user_text_padding_top">16dp</dimen>
     <dimen name="user_text_padding_bottom">16dp</dimen>
 
+    <!-- 关于界面 -->
+    <dimen name="about_layout_padding_left">16dp</dimen>
+    <dimen name="about_layout_padding_right">16dp</dimen>
+    <dimen name="about_layout_padding_top">16dp</dimen>
+    <dimen name="about_layout_padding_bottom">16dp</dimen>
+    <dimen name="about_layout_margin_top">24dp</dimen>
+    <dimen name="about_copyright_margin_top">32dp</dimen>
+    <dimen name="about_top_padding_left">16dp</dimen>
+    <dimen name="about_top_padding_right">16dp</dimen>
+    <dimen name="about_top_padding_top">24dp</dimen>
+    <dimen name="about_top_padding_bottom">16dp</dimen>
+    <dimen name="about_icon_width">85dp</dimen>
+    <dimen name="about_icon_height">85dp</dimen>
+    <dimen name="about_appname_text_size">20sp</dimen>
+    <dimen name="about_version_text_size">16sp</dimen>
+    <dimen name="about_title_text_size">16sp</dimen>
+    <dimen name="about_content_text_size">14sp</dimen>
+    <dimen name="about_copyright_text_size">14sp</dimen>
+
+    <!-- 搜索框 -->
+    <dimen name="search_view_margin_left">8dp</dimen>
+    <dimen name="search_view_height">55dp</dimen>
+
 </resources>

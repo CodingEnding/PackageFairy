@@ -9,13 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:background="?attr/colorPrimary"/>
+
+        <include layout="@layout/layout_toolbar"/>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -39,7 +34,8 @@
                         android:id="@+id/text_view_package_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
                         android:textSize="24sp"
                         android:textColor="@color/package_detail_text"
                         tools:text="大王卡"/>

@@ -30,12 +30,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingending.packagefairy.R;
+import com.codingending.packagefairy.activity.CallRankActivity;
+import com.codingending.packagefairy.activity.FlowRankActivity;
 import com.codingending.packagefairy.bean.StartEnd;
 import com.codingending.packagefairy.chart.ChartValueFormatter;
 import com.codingending.packagefairy.chart.DataFlowWindowView;
@@ -79,7 +82,7 @@ import static android.content.Context.TELEPHONY_SERVICE;
  */
 
 public class StatisticsFragment extends BaseFragment{
-    public static final String TAG="StatisticsFragment";
+    private static final String TAG="StatisticsFragment";
     public static final int PERMISSION_REQUEST=2;//权限请求码
     public static final int ACTIVITY_REQUEST=3;//启动Activity的请求码
 
@@ -89,6 +92,8 @@ public class StatisticsFragment extends BaseFragment{
     private PieChart pieChart;//流量消耗分布图
     private TextView flowTextView;//流量消耗
     private TextView callTextView;//已使用的通话时长
+    private LinearLayout flowRankView;//流量排行
+    private LinearLayout callRankView;//通话统计
 
     private List<String> permissionList=new ArrayList<>();//储存需要请求的权限
     private SQLiteDatabase database;//SQLite实例
@@ -187,6 +192,7 @@ public class StatisticsFragment extends BaseFragment{
             return;
         }
 
+        //为折线图绑定数据
         List<Entry> chartEntryList=new ArrayList<>();//存储图表需要的数据对
         for(int i=0;i<userConsumeList.size();i++){//循环获取每一天的流量数据
             UserConsumePO userConsumePO=userConsumeList.get(i);
@@ -206,16 +212,25 @@ public class StatisticsFragment extends BaseFragment{
         //为流量消耗饼状图绑定数据
         List<PieEntry> pieEntryList = new ArrayList<>();//饼状图需要的数据源
         List<FlowConsumePO> flowConsumePOList=DBUtils.getMonthAppConsumeList(database,DBUtils.TOP_APP_COUNT);//这里只获取Top-5
+        int topAppFlow=0;//TOP-N个应用的流量总消耗（MB）
         for(FlowConsumePO flowConsumePO:flowConsumePOList){
-            PieEntry pieEntry=new PieEntry(flowConsumePO.getFlowAmount()/1024,flowConsumePO.getAppName());
+            int flowMB=flowConsumePO.getFlowAmount()/1024;//MB为单位的流量消耗
+            PieEntry pieEntry=new PieEntry(flowMB,flowConsumePO.getAppName());
             pieEntryList.add(pieEntry);
+            topAppFlow+=flowMB;
         }
+        int leaveAppLow=monthTotalFlow-topAppFlow;//剩余App总的流量消耗（MB）
+        if(leaveAppLow>=1){//如果剩余App总的流量消耗大于1M就显示在饼状图中
+            pieEntryList.add(new PieEntry(leaveAppLow,getString(R.string.statistic_app_other)));
+        }
+
         PieDataSet pieSet = new PieDataSet(pieEntryList,"流量消耗分布图");
         PieData pieData = new PieData(pieSet);
         initPieDataSet(pieSet,pieData);
         pieChart.setData(pieData);
         pieChart.invalidate();
 
+        //隐藏加载进度条（显示内容区域）
         if(dataLayout.getVisibility()!=View.VISIBLE){
             dataLayout.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
@@ -341,6 +356,21 @@ public class StatisticsFragment extends BaseFragment{
         callTextView= (TextView) rootView.findViewById(R.id.text_view_call);
         dataLayout= (ScrollView) rootView.findViewById(R.id.layout_statistics);
         progressBar= (ProgressBar) rootView.findViewById(R.id.progressbar_statistics);
+        flowRankView= (LinearLayout) rootView.findViewById(R.id.layout_flow_rank);
+        callRankView= (LinearLayout) rootView.findViewById(R.id.layout_call_rank);
+
+        flowRankView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), FlowRankActivity.class));
+            }
+        });
+        callRankView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CallRankActivity.class));
+            }
+        });
     }
 
     /**

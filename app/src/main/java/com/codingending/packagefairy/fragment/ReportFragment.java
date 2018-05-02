@@ -46,7 +46,7 @@ import retrofit2.Response;
  */
 
 public class ReportFragment extends BaseFragment{
-    public static final String TAG="ReportFragment";
+    private static final String TAG="ReportFragment";
 
     private Button getRecommendBtn;
     private TextView titleView;

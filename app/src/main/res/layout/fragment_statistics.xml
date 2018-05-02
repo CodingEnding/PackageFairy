@@ -14,7 +14,7 @@
         android:id="@+id/layout_statistics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:visibility="visible">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,10 +66,7 @@
                 </LinearLayout>
             </LinearLayout>
             <!-- 分割线 -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:background="@drawable/drawable_line_gray"/>
+            <include layout="@layout/divider_line"/>
 
             <!-- 设备数据流量消耗走势图 -->
             <TextView
@@ -87,13 +84,11 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"/>
-            <!-- 分割线 -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:background="@drawable/drawable_line_gray"/>
 
-            <!-- 流量消耗分布饼状图 -->
+            <!-- 分割线 -->
+            <include layout="@layout/divider_line"/>
+
+            <!-- 设备数据流量消耗饼状分布图 -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,8 +102,42 @@
                 android:layout_height="150dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp" />
+
+            <!-- 应用流量排行+通话统计 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"/>
+                android:layout_marginBottom="24dp"
+                android:orientation="vertical"
+                android:showDividers="beginning|middle|end"
+                android:divider="@drawable/drawable_line_gray">
+                <LinearLayout
+                    android:id="@+id/layout_flow_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/RankLayoutStyle">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/RankTextViewStyle"
+                        android:text="应用流量排行"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_call_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/RankLayoutStyle">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/RankTextViewStyle"
+                        android:text="通话时长统计"/>
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

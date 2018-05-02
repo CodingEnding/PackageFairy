@@ -16,7 +16,7 @@ import okhttp3.Response;
  */
 
 public class InterceptorUtils {
-    public static final String TAG="InterceptorUtils";
+    private static final String TAG="InterceptorUtils";
 
     private InterceptorUtils(){}
 

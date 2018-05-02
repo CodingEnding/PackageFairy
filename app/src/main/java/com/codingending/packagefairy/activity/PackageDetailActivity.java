@@ -3,7 +3,6 @@ package com.codingending.packagefairy.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -11,7 +10,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.codingending.packagefairy.R;
@@ -27,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PackageDetailActivity extends BaseActivity {
-    public static final String TAG="PackageDetailActivity";
+    private static final String TAG="PackageDetailActivity";
     public static final String KEY_PACKAGE="PackageDetailActivity_PACKAGE";//存储PackageBean的键
     public static final String KEY_PACKAGE_ID="PackageDetailActivity_PACKAGE_ID";//存储套餐Id的键
     public static final String KEY_START_SOURCE="PackageDetailActivity_START_SOURCE";//存储启动来源的键
@@ -37,7 +35,6 @@ public class PackageDetailActivity extends BaseActivity {
 
     public static final int PACKAGE_CALL_INFINITE=-1;//在套餐内通话时长等于该值时，说明该套餐的套餐内通话时长是不限量的
 
-    private Toolbar toolbar;
     private TextView packageNameView;
     private TextView partnerView;
     private TextView operatorView;
@@ -214,27 +211,7 @@ public class PackageDetailActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home){
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void initToolbar() {
-        setSupportActionBar(toolbar);
-        ActionBar actionBar=getSupportActionBar();
-        if(actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_back);
-        }
-    }
-
-    @Override
     protected void initViews() {
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
         packageNameView= (TextView) findViewById(R.id.text_view_package_name);
         partnerView= (TextView) findViewById(R.id.text_view_partner);
         operatorView= (TextView) findViewById(R.id.text_view_operator);
@@ -245,6 +222,11 @@ public class PackageDetailActivity extends BaseActivity {
         extraPackageFlowView= (TextView) findViewById(R.id.text_view_extra_package_flow);
         freeFlowView= (TextView) findViewById(R.id.text_view_package_free_flow);
         startView= (TextView) findViewById(R.id.text_view_start);
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return (Toolbar) findViewById(R.id.toolbar);
     }
 
 }

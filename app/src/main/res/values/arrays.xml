@@ -8,4 +8,36 @@
         <item>无限流量</item>
         <item>全部</item>
     </string-array>
+
+    <string-array name="package_operator">
+        <item>中国联通</item>
+        <item>中国电信</item>
+        <item>中国移动</item>
+    </string-array>
+
+    <!-- 部分套餐合作方 -->
+    <string-array name="package_partner">
+        <item>腾讯</item>
+        <item>百度</item>
+        <item>阿里巴巴</item>
+        <item>今日头条</item>
+        <item>哔哩哔哩</item>
+        <item>支付宝 蚂蚁金服</item>
+        <item>阿里巴巴 钉钉</item>
+        <item>京东</item>
+        <item>网易</item>
+        <item>美团</item>
+        <item>新浪微博</item>
+        <item>小米</item>
+        <item>魅族</item>
+        <item>同花顺</item>
+        <item>优酷</item>
+        <item>喜马拉雅</item>
+        <item>携程</item>
+        <item>阿里文娱</item>
+        <item>360</item>
+        <item>饿了么</item>
+        <item>滴滴出行</item>
+    </string-array>
+
 </resources>

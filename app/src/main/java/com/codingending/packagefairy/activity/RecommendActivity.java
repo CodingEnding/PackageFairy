@@ -3,6 +3,7 @@ package com.codingending.packagefairy.activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -160,6 +161,11 @@ public class RecommendActivity extends BaseActivity {
                 startRecommend();
             }
         });
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return null;//本页面不存在Toolbar
     }
 
     //更新运营商列表

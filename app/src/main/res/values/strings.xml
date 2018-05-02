@@ -8,6 +8,8 @@
     <string name="activity_library">开源协议</string>
     <string name="activity_about">关于</string>
     <string name="activity_collection">我的收藏</string>
+    <string name="activity_flow_rank">流量排行</string>
+    <string name="activity_call_rank">通话统计</string>
     <string name="navigation_item_statistics">统计</string>
     <string name="navigation_item_find">发现</string>
     <string name="navigation_item_report">推荐报告</string>
@@ -33,7 +35,19 @@
     <string name="dialog_read_stats_cancel">取消</string>
     <string name="statistic_dialog_sure">重新授权</string>
     <string name="statistic_dialog_cancel">拒绝授权</string>
+    <string name="statistic_app_other">其他应用</string>
 
+    <!-- 应用流量排行界面 -->
+    <string name="tab_today">今日排行</string>
+    <string name="tab_week">本周排行</string>
+    <string name="tab_month">本月排行</string>
+
+    <!-- 通话时长统计 -->
+    <string name="call_rank_tips">以上数据仅统计了呼出电话的通话时长，并不包含接电话的通话时长（请以运营商的数据为准）</string>
+    <string name="call_rank_title_today">今日通话时长</string>
+    <string name="call_rank_title_week">本周通话时长</string>
+    <string name="call_rank_title_month">本月通话时长</string>
+    <string name="call_rank_no_data">暂无数据</string>
 
     <!-- 推荐套餐结果界面 -->
     <string name="report_recommend_tips">以下是根据您以往的流量/通话使用情况，选出的最合适的推荐套餐列表</string>
@@ -85,13 +99,27 @@
     <string name="menu_login_text">登录</string>
     <string name="menu_register_text">注册</string>
 
+    <!-- 关于界面 -->
+    <string name="about_title_author">开发者</string>
+    <string name="about_author">CodingEnding</string>
+    <string name="about_title_blog">博客</string>
+    <string name="about_blog">https://blog.csdn.net/codingending</string>
+    <string name="about_title_github">Github</string>
+    <string name="about_github">https://github.com/CodingEnding</string>
+    <string name="about_title_protocol">用户协议</string>
+    <string name="about_copyright">Copyright © 2018 CodingEnding\nAll Rights Reserved</string>
+
     <!-- 格式化字符串 -->
     <string name="flow_text">%sM</string>
+    <string name="rank_flow_mb_text">%sMB</string>
+    <string name="rank_flow_kb_text">%dKB</string>
     <string name="call_text">%s分钟</string>
     <string name="report_consume_text">预计%d元/月</string>
     <string name="find_package_star">%.1f分</string>
     <string name="find_package_no_star">暂无评分</string>
     <string name="find_package_month_rent">月租%d元</string>
+    <string name="call_rank_text">%d分钟</string>
+    <string name="about_version">v%s</string>
 
     <string name="package_detail_star">%.1f分</string>
     <string name="package_detail_month_rent">月租%d元</string>

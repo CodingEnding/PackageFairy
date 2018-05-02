@@ -1,11 +1,8 @@
 package com.codingending.packagefairy.activity.account;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -20,7 +17,6 @@ import com.codingending.packagefairy.utils.PreferenceUtils;
  */
 public class BackupActivity extends BaseActivity {
     private static final String TAG="BackupActivity";
-    private Toolbar toolbar;
     private SwitchCompat autoBackupSwitch;
 //    private LinearLayout backupInternalView;//同步间隔[暂时弃用]
     private LinearLayout startBackupView;
@@ -41,29 +37,7 @@ public class BackupActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    protected void initToolbar() {
-        setSupportActionBar(toolbar);
-        ActionBar actionBar=getSupportActionBar();
-        if(actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_back);
-        }
-    }
-
-    @Override
     protected void initViews() {
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
         autoBackupSwitch= (SwitchCompat) findViewById(R.id.switch_auto_backup);
 //        backupInternalView= (LinearLayout) findViewById(R.id.layout_backup_internal);
         startBackupView= (LinearLayout) findViewById(R.id.layout_start_backup);
@@ -82,5 +56,10 @@ public class BackupActivity extends BaseActivity {
                 //TODO 开始同步
             }
         });
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return (Toolbar) findViewById(R.id.toolbar);
     }
 }

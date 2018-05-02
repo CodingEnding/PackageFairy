@@ -1,9 +1,7 @@
 package com.codingending.packagefairy.activity.account;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,7 +10,6 @@ import com.codingending.packagefairy.activity.BaseActivity;
 import com.codingending.packagefairy.utils.PreferenceUtils;
 
 public class UserActivity extends BaseActivity {
-    private Toolbar toolbar;
     private TextView usernameView;
     private TextView emailView;
     private TextView phoneView;
@@ -27,26 +24,7 @@ public class UserActivity extends BaseActivity {
     }
 
     @Override
-    protected void initToolbar() {
-        setSupportActionBar(toolbar);
-        ActionBar actionBar=getSupportActionBar();
-        if(actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);//显示左侧返回按钮
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_back);//设置图标
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home){//如果左上角的按钮被点击
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     protected void initViews() {
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
         usernameView= (TextView) findViewById(R.id.text_view_username);
         emailView= (TextView) findViewById(R.id.text_view_email);
         phoneView= (TextView) findViewById(R.id.text_view_phone);
@@ -66,5 +44,10 @@ public class UserActivity extends BaseActivity {
                 //TODO 修改密码
             }
         });
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return (Toolbar) findViewById(R.id.toolbar);
     }
 }

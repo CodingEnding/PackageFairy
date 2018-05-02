@@ -56,6 +56,11 @@
                 android:id="@+id/text_view_package_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:gravity="center_horizontal"
+                android:singleLine="true"
+                android:ellipsize="middle"
                 android:textSize="18sp"
                 android:textColor="#fff"
                 tools:text="大王卡"/>

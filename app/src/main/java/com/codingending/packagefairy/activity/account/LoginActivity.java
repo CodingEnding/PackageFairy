@@ -1,6 +1,5 @@
 package com.codingending.packagefairy.activity.account;
 
-import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -32,7 +31,6 @@ import retrofit2.Response;
  */
 public class LoginActivity extends BaseActivity {
     private static final String TAG="LoginActivity";
-    private Toolbar toolbar;
     private EditText userNameEditText;
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -48,16 +46,6 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         initViews();
         initToolbar();
-    }
-
-    @Override
-    protected void initToolbar() {
-        setSupportActionBar(toolbar);
-        ActionBar actionBar=getSupportActionBar();
-        if(actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_back);
-        }
     }
 
     @Override
@@ -81,9 +69,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case android.R.id.home:
-                finish();
-                return true;
             case R.id.menu_register:
                 isLoginMode=false;
                 supportInvalidateOptionsMenu();//刷新菜单
@@ -117,7 +102,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initViews() {
         userNameEditText= (EditText) findViewById(R.id.edit_text_username);
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
         emailEditText= (EditText) findViewById(R.id.edit_text_email);
         passwordEditText= (EditText) findViewById(R.id.edit_text_password);
         registerBtn= (Button) findViewById(R.id.btn_register);
@@ -136,6 +120,11 @@ public class LoginActivity extends BaseActivity {
                 login();
             }
         });
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return (Toolbar) findViewById(R.id.toolbar);
     }
 
     //注册

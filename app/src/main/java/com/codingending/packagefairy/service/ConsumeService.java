@@ -39,7 +39,7 @@ import java.util.List;
  * @author CodingEnding
  */
 public class ConsumeService extends Service {
-    public static final String TAG="ConsumeService";
+    private static final String TAG="ConsumeService";
     public static final int TIMER_INTERNAL=10*60*1000;//定时更新的间隔（10min）
     public static final String ACTION_STATS_UPDATE="com.codingending.packagefairy.STATS_UPDATE";//数据已更新
 //    public static final int LEAST_FLOW_BOTTOM=2;//计入统计的最小应用流量消耗（M）（少于这个消耗量的应用就不再统计）
@@ -105,13 +105,6 @@ public class ConsumeService extends Service {
                     if(needSendBroad){
                         localBroadcastManager.sendBroadcast(new Intent(ACTION_STATS_UPDATE));//发送本地广播
                     }
-                    //TODO 演示
-//                    LogUtils.i(TAG,"从数据库中读取.........");
-//                    List<UserConsumePO> dataList=DBUtils.getFirstToNowUserConsumeList(database);
-//                    for(UserConsumePO userConsumePO:dataList){
-//                        LogUtils.i(TAG,"第"+userConsumePO.getDay()+"天:"+userConsumePO.getAllFlow()+"M "
-//                                +userConsumePO.getCallTime()+" 分钟");
-//                    }
                 }
                 else{
                     LogUtils.w(TAG,"没有权限！");
@@ -265,6 +258,7 @@ public class ConsumeService extends Service {
 
         List<FlowConsumePO> flowConsumePOList=getAppFlowConsumeList(networkStatsManager,
                 subscriberId,startEnd,day,month,year);//获取今日的应用流量数据列表
+//        LogUtils.i(TAG,flowConsumePOList.toString());//输出每次更新的数据
         DBUtils.updateOrInsertByDate(database,flowConsumePOList);//批量更新或插入数据
     }
 

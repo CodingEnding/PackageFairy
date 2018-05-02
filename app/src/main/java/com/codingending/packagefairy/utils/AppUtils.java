@@ -2,9 +2,11 @@ package com.codingending.packagefairy.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.util.SparseArray;
 
 import com.codingending.packagefairy.bean.SimpleAppInfo;
@@ -61,6 +63,50 @@ public class AppUtils {
 //                    +" appName:"+simpleAppInfo.appName+" uid:"+simpleAppInfo.uid);
         }
         return appMap;
+    }
+
+    /**
+     * 获取应用图标
+     * @param packageName 包名
+     */
+    public static Drawable getAppIcon(Context context,String packageName){
+        Drawable appIcon=null;
+        PackageManager packageManager=context.getPackageManager();
+        try {
+            ApplicationInfo applicationInfo=packageManager.getApplicationInfo(packageName,0);
+            appIcon=applicationInfo.loadIcon(packageManager);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return appIcon;
+    }
+
+    /**
+     * 获取当前的版本号
+     */
+    public static int getVersionCode(Context context){
+        int versionCode=0;
+        String packageName=context.getPackageName();//获取包名
+        try {
+            versionCode=context.getPackageManager().getPackageInfo(packageName,0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionCode;
+    }
+
+    /**
+     * 获取当前的版本名称
+     */
+    public static String getVersionName(Context context){
+        String versionName="";
+        String packageName=context.getPackageName();//获取包名
+        try {
+            versionName=context.getPackageManager().getPackageInfo(packageName,0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionName;
     }
 
 }

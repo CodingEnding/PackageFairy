@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -62,6 +62,66 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <!-- 统计界面流量排行+通话时长统计的Layout风格 -->
+    <style name="RankLayoutStyle" parent="ForegroundRippleStyle">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <!-- 统计界面流量排行+通话时长统计的TextView风格 -->
+    <style name="RankTextViewStyle">
+        <item name="android:drawableRight">@drawable/ic_right</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#414141</item>
+    </style>
+
+    <!-- 通话统计界面的Layout风格 -->
+    <style name="CallRankLayoutStyle">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <!-- 通话统计界面的标题TextView风格 -->
+    <style name="CallRankTitleStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#414141</item>
+    </style>
+
+    <!-- 通话统计界面的内容TextView风格 -->
+    <style name="CallRankContentStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#212121</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <!-- 关于界面的信息区域风格 -->
+    <style name="AboutInfoLayoutStyle" parent="ForegroundRippleStyle">
+        <item name="android:paddingLeft">@dimen/about_layout_padding_left</item>
+        <item name="android:paddingRight">@dimen/about_layout_padding_right</item>
+        <item name="android:paddingTop">@dimen/about_layout_padding_top</item>
+        <item name="android:paddingBottom">@dimen/about_layout_padding_bottom</item>
+    </style>
+
+    <!-- 关于界面的标题TextView风格 -->
+    <style name="AboutTitleTextViewStyle">
+        <item name="android:textSize">@dimen/about_title_text_size</item>
+        <item name="android:textColor">@color/about_title_text</item>
+    </style>
+
+    <!-- 关于界面的内容TextView风格 -->
+    <style name="AboutContentTextViewStyle">
+        <item name="android:textSize">@dimen/about_content_text_size</item>
+        <item name="android:gravity">right</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingLeft">16dp</item>
     </style>
 
 </resources>

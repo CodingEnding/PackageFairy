@@ -14,6 +14,11 @@ public class FlowConsumePO {
     private int month;//月数
     private int year;//年份
 
+    @Override
+    public String toString() {
+        return appName+":"+(flowAmount/1024.0)+"MB";
+    }
+
     public FlowConsumePO() {
     }
 

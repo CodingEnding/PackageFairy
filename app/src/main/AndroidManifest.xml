@@ -53,10 +53,22 @@
         <activity
             android:name=".activity.account.BackupActivity"
             android:label="@string/activity_backup" />
-        <activity android:name=".activity.account.AboutActivity"
-            android:label="@string/activity_about"/>
-        <activity android:name=".activity.account.LibraryActivity"
-            android:label="@string/account_item_library"/>
+        <activity
+            android:name=".activity.account.AboutActivity"
+            android:label="@string/activity_about" />
+        <activity
+            android:name=".activity.account.LibraryActivity"
+            android:label="@string/account_item_library" />
+        <activity
+            android:name=".activity.FlowRankActivity"
+            android:label="@string/activity_flow_rank" />
+        <activity
+            android:name=".activity.CallRankActivity"
+            android:label="@string/activity_call_rank" />
+        <activity android:name=".activity.SingleCategoryActivity" />
+        <activity android:name=".activity.MultiCategoryActivity" />
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.SearchReportActivity"></activity>
     </application>
 
 </manifest>

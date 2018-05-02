@@ -17,11 +17,13 @@
     <!-- 底部导航按钮被选中的图标颜色 -->
     <color name="navigation_item_active">#E51C23</color>
 
-    <!-- ****************图表相关的颜色*********** -->
+    <!-- ****************统计界面*********** -->
     <!-- 流量显示区域弹窗的字体颜色 -->
     <color name="flow_marker_text">#fff</color>
     <!-- 流量显示区域弹窗的背景颜色 -->
     <color name="flow_marker_background">#E84E40</color>
+    <!--流量排行列表的背景-->
+    <color name="flow_rank_background">#fff</color>
 
     <!-- *************套餐推荐弹出窗口相关的颜色************ -->
     <!-- 背景色 -->
@@ -102,6 +104,11 @@
     <color name="account_text">#EF212121</color>
     <color name="user_text">#EF212121</color>
     <color name="device_type_text">#212121</color>
+    <color name="about_title_text">#212121</color>
+    <color name="about_layout_background">#fff</color>
+
+    <!-- **********搜索************* -->
+    <color name="search_category_text">#C52baf2b</color>
 
     <!-- ************登录/注册********** -->
     <color name="login_btn_normal">#E84E40</color>

@@ -1,12 +1,9 @@
 package com.codingending.packagefairy.activity.account;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.codingending.packagefairy.R;
 import com.codingending.packagefairy.activity.BaseActivity;
@@ -32,7 +29,6 @@ import retrofit2.Response;
 public class DeviceActivity extends BaseActivity {
     private static final String TAG="DeviceActivity";
 
-    private Toolbar toolbar;
     private RecyclerView deviceRecyclerView;
     private LinearLayoutManager deviceLayoutManager;
     private DeviceRecyclerAdapter deviceRecyclerAdapter;
@@ -92,30 +88,13 @@ public class DeviceActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    protected void initToolbar() {
-        setSupportActionBar(toolbar);
-        ActionBar actionBar=getSupportActionBar();
-        if(actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_back);
-        }
-    }
-
-    @Override
     protected void initViews() {
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
         deviceRecyclerView= (RecyclerView) findViewById(R.id.recycler_view_device);
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return (Toolbar) findViewById(R.id.toolbar);
     }
 
 }

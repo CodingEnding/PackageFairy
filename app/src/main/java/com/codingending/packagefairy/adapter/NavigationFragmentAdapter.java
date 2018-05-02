@@ -22,8 +22,8 @@ import java.util.List;
  */
 
 public class NavigationFragmentAdapter extends FragmentPagerAdapter{
-    public static final String TAG="NavigationAdapter";
-    public static final int PAGE_COUNT=4;//首页导航页数为4
+    private static final String TAG="NavigationAdapter";
+    private static final int PAGE_COUNT=4;//首页导航页数为4
 
     private FragmentManager fragmentManager;
     private SparseArray<String> tagMap=new SparseArray<>();//存储每个Fragment的标签，刷新页面的依据

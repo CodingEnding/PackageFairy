@@ -30,7 +30,7 @@ import ezy.boost.update.UpdateManager;
  */
 
 public class AccountFragment extends BaseFragment{
-    public static final String TAG="AccountFragment";
+    private static final String TAG="AccountFragment";
     private TextView userView;
     private TextView backupView;
     private TextView deviceView;
