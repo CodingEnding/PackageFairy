@@ -68,7 +68,14 @@
         <activity android:name=".activity.SingleCategoryActivity" />
         <activity android:name=".activity.MultiCategoryActivity" />
         <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.SearchReportActivity"></activity>
+        <activity android:name=".activity.SearchReportActivity" />
+        <activity
+            android:name=".activity.account.ForgetActivity"
+            android:label="@string/activity_forget" />
+        <activity android:name=".activity.account.NotificationActivity"
+            android:label="@string/activity_notification"/>
+        <activity android:name=".activity.account.FeedbackActivity"
+            android:label="@string/activity_feedback"/>
     </application>
 
 </manifest>

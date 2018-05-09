@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/user_dialog_padding_left"
+    android:paddingRight="@dimen/user_dialog_padding_right"
+    android:paddingTop="@dimen/user_dialog_padding_top"
+    android:paddingBottom="@dimen/user_dialog_padding_bottom">
+
+    <EditText
+        android:id="@+id/edit_text_dialog_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"/>
+
+</FrameLayout>

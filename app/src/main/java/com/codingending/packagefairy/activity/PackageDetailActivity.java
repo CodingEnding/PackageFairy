@@ -10,6 +10,9 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codingending.packagefairy.R;
@@ -45,6 +48,15 @@ public class PackageDetailActivity extends BaseActivity {
     private TextView extraPackageFlowView;
     private TextView freeFlowView;
     private TextView startView;//套餐的评分
+    private RatingBar starRatingBar;
+    private RatingBar myScoreRatingBar;
+    private TextView myScoreView;
+    private TextView monthConsumeView;
+    private TextView extraPackageInfoView;
+    private Button linkBtn;
+    private Button scoreBtn;
+    private LinearLayout extraPackageInfoLayout;
+    private LinearLayout monthConsumeLayout;
 
     /**
      * 提供给ReportFragment的启动方法
@@ -221,7 +233,16 @@ public class PackageDetailActivity extends BaseActivity {
         packageFlowView= (TextView) findViewById(R.id.text_view_package_flow);
         extraPackageFlowView= (TextView) findViewById(R.id.text_view_extra_package_flow);
         freeFlowView= (TextView) findViewById(R.id.text_view_package_free_flow);
-        startView= (TextView) findViewById(R.id.text_view_start);
+        startView= (TextView) findViewById(R.id.text_view_star);
+        starRatingBar= (RatingBar) findViewById(R.id.rating_bar_star);
+        myScoreRatingBar= (RatingBar) findViewById(R.id.rating_bar_my_score);
+        myScoreView= (TextView) findViewById(R.id.text_view_my_score);
+        monthConsumeView= (TextView) findViewById(R.id.text_view_month_consume);
+        extraPackageInfoView = (TextView) findViewById(R.id.text_view_package_extra_info);
+        linkBtn= (Button) findViewById(R.id.btn_package_link);
+        scoreBtn= (Button) findViewById(R.id.btn_package_score);
+        monthConsumeLayout= (LinearLayout) findViewById(R.id.layout_month_consume);
+        extraPackageInfoLayout= (LinearLayout) findViewById(R.id.layout_package_extra_info);
     }
 
     @Override

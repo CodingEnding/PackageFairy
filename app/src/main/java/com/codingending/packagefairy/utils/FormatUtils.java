@@ -1,5 +1,9 @@
 package com.codingending.packagefairy.utils;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 /**
  * 与格式相关的工具类
  * Created by CodingEnding on 2018/4/21.
@@ -24,4 +28,14 @@ public class FormatUtils {
         }
         return source;
     }
+
+    /**
+     * 常规的日期格式化操作
+     * @param timestamp 日期
+     */
+    public static String formatDate(Timestamp timestamp){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:SS",Locale.CHINA);
+        return simpleDateFormat.format(timestamp);
+    }
+
 }

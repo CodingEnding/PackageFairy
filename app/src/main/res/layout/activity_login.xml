@@ -70,16 +70,31 @@
         android:textSize="16sp"
         android:text="@string/login_forget"/>
 
-    <Button
-        android:id="@+id/btn_register"
+    <LinearLayout
+        android:id="@+id/layout_register_action"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/login_btn_background"
-        android:textColor="#fff"
-        android:text="@string/login_btn_register"
-        android:visibility="gone"/>
+        android:orientation="vertical"
+        android:visibility="gone">
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/login_btn_background"
+            android:textColor="#fff"
+            android:text="@string/login_btn_register" />
+        <TextView
+            android:id="@+id/text_view_protocol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/register_protocol_tips"/>
+    </LinearLayout>
 
 </LinearLayout>

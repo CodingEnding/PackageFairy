@@ -1,10 +1,12 @@
 package com.codingending.packagefairy.activity;
 
+import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.codingending.packagefairy.R;
 import com.codingending.packagefairy.utils.LogUtils;
@@ -42,6 +44,22 @@ public abstract class BaseActivity extends AppCompatActivity {
                 actionBar.setHomeAsUpIndicator(R.drawable.ic_action_back);
             }
         }
+    }
+
+    /**
+     * 显示Toast（默认显示时间为short）
+     * @param msg 内容
+     */
+    protected void showToast(@StringRes int msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 显示Toast（显示时间为Long）
+     * @param msg 内容
+     */
+    protected void showLongToast(@StringRes int msg){
+        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
     }
 
     @Override

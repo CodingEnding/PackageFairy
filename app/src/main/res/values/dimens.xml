@@ -31,6 +31,12 @@
     <dimen name="user_text_padding_top">16dp</dimen>
     <dimen name="user_text_padding_bottom">16dp</dimen>
 
+    <!-- 忘记密码 -->
+    <dimen name="forget_edit_padding_left">8dp</dimen>
+    <dimen name="forget_edit_padding_right">8dp</dimen>
+    <dimen name="forget_edit_padding_top">8dp</dimen>
+    <dimen name="forget_edit_padding_bottom">8dp</dimen>
+
     <!-- 关于界面 -->
     <dimen name="about_layout_padding_left">16dp</dimen>
     <dimen name="about_layout_padding_right">16dp</dimen>
@@ -49,6 +55,13 @@
     <dimen name="about_title_text_size">16sp</dimen>
     <dimen name="about_content_text_size">14sp</dimen>
     <dimen name="about_copyright_text_size">14sp</dimen>
+
+    <!-- 用户信息 -->
+    <dimen name="user_dialog_padding_left">20dp</dimen>
+    <dimen name="user_dialog_padding_right">20dp</dimen>
+    <dimen name="user_dialog_padding_top">12dp</dimen>
+    <dimen name="user_dialog_padding_bottom">12dp</dimen>
+    <dimen name="user_dialog_pwd_margin_top">6dp</dimen>
 
     <!-- 搜索框 -->
     <dimen name="search_view_margin_left">8dp</dimen>

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#D01716</color>
     <color name="colorAccent">#E51C23</color>
 
+    <color name="color_white">#fff</color>
     <color name="color_gray">#e0e0e0</color>
     <color name="color_pink_one">#e91463</color>
     <color name="color_pink_two">#880e4f</color>
@@ -90,12 +91,15 @@
     <!--提示文字颜色-->
     <color name="package_detail_tips_text">#424242</color>
     <!-- 特权说明文字颜色 -->
-    <color name="package_detail_privilege">#2baf2b</color>
+    <color name="package_detail_privilege">#D92baf2b</color>
     <!--<color name="package_detail_month_rent">#fb8c00</color>-->
     <color name="package_detail_month_rent">#2baf2b</color>
     <!-- 套餐评分文字颜色 -->
     <!--<color name="package_detail_star_text">#ef6c00</color>-->
     <color name="package_detail_star_text">#fb8c00</color>
+    <color name="link_btn_normal">#2BAF2B</color>
+    <color name="link_btn_pressed">#259B24</color>
+    <color name="link_btn_disable">#72D572</color>
 
     <!-- *************账户界面相关的颜色************ -->
     <!-- 标题文字颜色 -->
@@ -106,6 +110,12 @@
     <color name="device_type_text">#212121</color>
     <color name="about_title_text">#212121</color>
     <color name="about_layout_background">#fff</color>
+    <color name="feedback_btn_normal">#E84E40</color>
+    <color name="feedback_btn_pressed">#E51C23</color>
+    <color name="feedback_btn_disable">#F69988</color>
+    <color name="feedback_btn_text">#fff</color>
+    <color name="notification_title_text">#212121</color>
+    <color name="notification_content_text">#EF212121</color>
 
     <!-- **********搜索************* -->
     <color name="search_category_text">#C52baf2b</color>
@@ -115,5 +125,7 @@
     <color name="login_btn_pressed">#E51C23</color>
     <color name="login_btn_disable">#F69988</color>
     <color name="login_text">#424242</color>
+    <color name="forget_btn_code">#C52baf2b</color>
+    <color name="forget_btn_code_disabled">#aaa</color>
 
 </resources>

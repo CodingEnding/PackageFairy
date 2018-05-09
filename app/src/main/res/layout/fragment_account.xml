@@ -14,37 +14,47 @@
             android:layout_height="wrap_content"
             style="@style/AccountTitleTextViewStyle"
             android:text="@string/account_title_user"/>
-        <TextView
-            android:id="@+id/text_view_user"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_account"
-            style="@style/AccountTextViewStyle"
-            tools:text="codingending"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_line_height"
-            android:background="@drawable/drawable_line_gray"/>
-
-        <TextView
-            android:id="@+id/text_view_backup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_backup"
-            style="@style/AccountTextViewStyle"
-            android:text="@string/account_item_backup"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_line_height"
-            android:background="@drawable/drawable_line_gray"/>
-
-        <TextView
-            android:id="@+id/text_view_device"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_device"
-            style="@style/AccountTextViewStyle"
-            android:text="@string/account_item_device"/>
+            android:orientation="vertical"
+            android:divider="@drawable/drawable_line_gray"
+            android:showDividers="middle">
+            <TextView
+                android:id="@+id/text_view_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_account"
+                style="@style/AccountTextViewStyle"
+                tools:text="codingending"/>
+            <TextView
+                android:id="@+id/text_view_backup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_backup"
+                style="@style/AccountTextViewStyle"
+                android:text="@string/account_item_backup"/>
+            <TextView
+                android:id="@+id/text_view_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_device"
+                style="@style/AccountTextViewStyle"
+                android:text="@string/account_item_device"/>
+            <FrameLayout
+                android:id="@+id/layout_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_bell"
+                    tools:drawableRight="@drawable/ic_dot"
+                    style="@style/AccountTextViewStyle"
+                    android:text="@string/account_item_notification"/>
+            </FrameLayout>
+        </LinearLayout>
 
         <!-- 应用区域 -->
         <TextView
@@ -52,47 +62,50 @@
             android:layout_height="wrap_content"
             style="@style/AccountTitleTextViewStyle"
             android:text="@string/account_title_app"/>
-        <TextView
-            android:id="@+id/text_view_check_update"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_update"
-            style="@style/AccountTextViewStyle"
-            android:text="@string/account_item_update"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_line_height"
-            android:background="@drawable/drawable_line_gray"/>
-        <TextView
-            android:id="@+id/text_view_library"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_library"
-            style="@style/AccountTextViewStyle"
-            android:text="@string/account_item_library"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@drawable/drawable_line_gray"/>
-        <TextView
-            android:id="@+id/text_view_about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_about"
-            style="@style/AccountTextViewStyle"
-            android:text="@string/account_item_about"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_line_height"
-            android:background="@drawable/drawable_line_gray"/>
-        <TextView
-            android:id="@+id/text_view_logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_logout"
-            style="@style/AccountTextViewStyle"
-            android:text="@string/account_item_logout"
-            android:visibility="gone"/>
+            android:orientation="vertical"
+            android:showDividers="middle|end"
+            android:divider="@drawable/drawable_line_gray">
+            <TextView
+                android:id="@+id/text_view_check_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_update"
+                style="@style/AccountTextViewStyle"
+                android:text="@string/account_item_update"/>
+            <TextView
+                android:id="@+id/text_view_library"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_library"
+                style="@style/AccountTextViewStyle"
+                android:text="@string/account_item_library"/>
+            <TextView
+                android:id="@+id/text_view_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_feedback"
+                style="@style/AccountTextViewStyle"
+                android:text="@string/account_item_feedback"/>
+            <TextView
+                android:id="@+id/text_view_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_about"
+                style="@style/AccountTextViewStyle"
+                android:text="@string/account_item_about"/>
+            <TextView
+                android:id="@+id/text_view_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_logout"
+                style="@style/AccountTextViewStyle"
+                android:text="@string/account_item_logout"
+                android:visibility="gone"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>

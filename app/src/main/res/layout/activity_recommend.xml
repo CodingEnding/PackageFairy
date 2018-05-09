@@ -33,7 +33,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="每月消耗流量（G）"
+                android:text="每月消耗流量（GB）"
                 android:textSize="@dimen/recommend_tips_text_size"
                 android:textColor="@color/recommend_window_tips_text"/>
             <EditText

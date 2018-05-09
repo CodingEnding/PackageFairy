@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.Nullable;
 
 import com.codingending.packagefairy.database.PackageSQLiteOpenHelper;
+import com.codingending.packagefairy.entity.PackageBean;
 import com.codingending.packagefairy.entity.UserConsume;
 import com.codingending.packagefairy.po.FlowConsumePO;
 import com.codingending.packagefairy.po.UserConsumePO;
@@ -319,6 +320,97 @@ public class DBUtils {
         }
         cursor.close();//关闭资源
         return userConsumePO;
+    }
+
+    /*****************************与Package相关的方法*************************/
+    //插入一条新数据
+    public static long insert(SQLiteDatabase database,PackageBean packageBean){
+        ContentValues values=new ContentValues();
+        values.put("id",packageBean.getId());
+        values.put("name",packageBean.getName());
+        values.put("partner",packageBean.getPartner());
+        values.put("operator",packageBean.getOperator());
+        values.put("monthRent",packageBean.getMonthRent());
+        values.put("packageCountryFlow",packageBean.getPackageCountryFlow());
+        values.put("packageProvinceFlow",packageBean.getPackageProvinceFlow());
+        values.put("packageCall",packageBean.getPackageCall());
+        values.put("extraPackageCall",packageBean.getExtraPackageCall());
+        values.put("extraCountryFlow",packageBean.getExtraCountryFlow());
+        values.put("extraProvinceFlow",packageBean.getExtraProvinceFlow());
+        values.put("extraProvinceOutFlow",packageBean.getExtraProvinceOutFlow());
+        values.put("extraCountryDayRent",packageBean.getExtraCountryDayRent());
+        values.put("extraCountryDayFlow",packageBean.getExtraCountryDayFlow());
+        values.put("extraProvinceInDayRent",packageBean.getExtraProvinceInDayRent());
+        values.put("extraProvinceInDayFlow",packageBean.getExtraProvinceInDayFlow());
+        values.put("extraProvinceOutDayRent",packageBean.getExtraProvinceOutDayRent());
+        values.put("extraProvinceOutDayFlow",packageBean.getExtraProvinceOutDayFlow());
+        values.put("extraFlowType",packageBean.getExtraFlowType());
+        values.put("privilegeDescription",packageBean.getPrivilegeDescription());
+        values.put("star",packageBean.getStar());
+        values.put("url",packageBean.getUrl());
+        values.put("remark",packageBean.getRemark());
+        values.put("abandon",packageBean.getAbandon());
+        values.put("freeFlowType",packageBean.getFreeFlowType());
+        values.put("totalConsume",packageBean.getTotalConsume());
+        return database.insert(PackageSQLiteOpenHelper.TABLE_NAME_RECOMMEND_PACKAGE,null,values);
+    }
+
+    //批量插入数据
+    public static void insertRecommendPackageList(SQLiteDatabase database,List<PackageBean> dataList){
+        database.beginTransaction();//开启事务
+        for(PackageBean packageBean:dataList){
+            insert(database,packageBean);
+        }
+        database.setTransactionSuccessful();
+        database.endTransaction();
+    }
+
+    /**
+     * 删除推荐套餐表中所有的数据
+     * @return 受影响的行数
+     */
+    public static int deleteAllRecommendPackage(SQLiteDatabase database){
+        return database.delete(PackageSQLiteOpenHelper.TABLE_NAME_RECOMMEND_PACKAGE,null,null);
+    }
+
+    //获取所有推荐套餐
+    public static List<PackageBean> getRecommendPackageList(SQLiteDatabase database){
+        List<PackageBean> dataList=new ArrayList<>();
+        Cursor cursor=database.query(PackageSQLiteOpenHelper.TABLE_NAME_RECOMMEND_PACKAGE,null,
+                null,null,null,null,"totalConsume");//根据每月预计消费排序
+        if(cursor.moveToFirst()){
+            do{//批量获取数据
+                PackageBean packageBean=new PackageBean();
+                packageBean.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                packageBean.setName(cursor.getString(cursor.getColumnIndex("name")));
+                packageBean.setPartner(cursor.getString(cursor.getColumnIndex("partner")));
+                packageBean.setOperator(cursor.getString(cursor.getColumnIndex("operator")));
+                packageBean.setMonthRent(cursor.getInt(cursor.getColumnIndex("monthRent")));
+                packageBean.setPackageCountryFlow(cursor.getInt(cursor.getColumnIndex("packageCountryFlow")));
+                packageBean.setPackageProvinceFlow(cursor.getInt(cursor.getColumnIndex("packageProvinceFlow")));
+                packageBean.setPackageCall(cursor.getInt(cursor.getColumnIndex("packageCall")));
+                packageBean.setExtraPackageCall(cursor.getDouble(cursor.getColumnIndex("extraPackageCall")));
+                packageBean.setExtraCountryFlow(cursor.getDouble(cursor.getColumnIndex("extraCountryFlow")));
+                packageBean.setExtraProvinceFlow(cursor.getDouble(cursor.getColumnIndex("extraProvinceFlow")));
+                packageBean.setExtraProvinceOutFlow(cursor.getDouble(cursor.getColumnIndex("extraProvinceOutFlow")));
+                packageBean.setExtraCountryDayRent(cursor.getInt(cursor.getColumnIndex("extraCountryDayRent")));
+                packageBean.setExtraCountryDayFlow(cursor.getInt(cursor.getColumnIndex("extraCountryDayFlow")));
+                packageBean.setExtraProvinceInDayRent(cursor.getInt(cursor.getColumnIndex("extraProvinceInDayRent")));
+                packageBean.setExtraProvinceInDayFlow(cursor.getInt(cursor.getColumnIndex("extraProvinceInDayFlow")));
+                packageBean.setExtraProvinceOutDayRent(cursor.getInt(cursor.getColumnIndex("extraProvinceOutDayRent")));
+                packageBean.setExtraProvinceOutFlow(cursor.getInt(cursor.getColumnIndex("extraProvinceOutDayFlow")));
+                packageBean.setExtraFlowType(cursor.getInt(cursor.getColumnIndex("extraFlowType")));
+                packageBean.setPrivilegeDescription(cursor.getString(cursor.getColumnIndex("privilegeDescription")));
+                packageBean.setStar(cursor.getDouble(cursor.getColumnIndex("star")));
+                packageBean.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+                packageBean.setRemark(cursor.getString(cursor.getColumnIndex("remark")));
+                packageBean.setAbandon(cursor.getInt(cursor.getColumnIndex("abandon")));
+                packageBean.setFreeFlowType(cursor.getInt(cursor.getColumnIndex("freeFlowType")));
+                packageBean.setTotalConsume(cursor.getDouble(cursor.getColumnIndex("totalConsume")));
+                dataList.add(packageBean);
+            }while(cursor.moveToNext());
+        }
+        return dataList;
     }
 
 }

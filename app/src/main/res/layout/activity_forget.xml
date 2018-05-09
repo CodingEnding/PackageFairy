@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.codingending.packagefairy.activity.account.ForgetActivity">
+
+    <!-- Toolbar -->
+    <include layout="@layout/layout_toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/edit_text_forget_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_email"
+                android:inputType="textEmailAddress"
+                android:hint="邮箱"
+                style="@style/ForgetEditStyle"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/edit_text_forget_code"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_code"
+                    android:hint="验证码"
+                    android:maxLength="6"
+                    android:inputType="number"
+                    style="@style/ForgetEditStyle"/>
+                <TextView
+                    android:id="@+id/text_view_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/forget_code_background"
+                    android:textColor="@color/forget_btn_code"
+                    android:textSize="14sp"
+                    android:text="@string/forget_get_code"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_forget_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <EditText
+                    android:id="@+id/edit_text_forget_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:inputType="textPassword"
+                    android:hint="新的密码"
+                    style="@style/ForgetEditStyle"/>
+                <EditText
+                    android:id="@+id/edit_text_forget_again_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:inputType="textPassword"
+                    android:hint="确认密码"
+                    style="@style/ForgetEditStyle"/>
+                <Button
+                    android:id="@+id/btn_forget_modify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="确认修改"
+                    android:textColor="#fff"
+                    android:background="@drawable/login_btn_background"
+                    android:enabled="false"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_forget_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="下一步"
+                android:textColor="#fff"
+                android:background="@drawable/login_btn_background"
+                android:enabled="false"/>
+
+            <TextView
+                android:id="@+id/text_view_email_tips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:lineSpacingMultiplier="1.2"
+                android:gravity="center_horizontal"
+                android:text="@string/forget_email_tips"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -2,10 +2,12 @@ package com.codingending.packagefairy.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.codingending.packagefairy.utils.LogUtils;
 
@@ -19,6 +21,22 @@ public abstract class BaseFragment extends Fragment{
      * 初始化View
      */
     protected abstract void initViews(View rootView);
+
+    /**
+     * 显示Toast（默认显示时间为short）
+     * @param msg 内容
+     */
+    protected void showToast(@StringRes int msg){
+        Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 显示Toast（显示时间为Long）
+     * @param msg 内容
+     */
+    protected void showLongToast(@StringRes int msg){
+        Toast.makeText(getActivity(),msg,Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {

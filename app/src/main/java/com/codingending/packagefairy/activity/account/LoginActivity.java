@@ -1,5 +1,7 @@
 package com.codingending.packagefairy.activity.account;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -8,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +40,18 @@ public class LoginActivity extends BaseActivity {
     private Button loginBtn;
     private Button registerBtn;
     private TextView forgetView;
+    private TextView protocolView;
+    private LinearLayout registerActionLayout;//包含注册按钮+用户协议提示
 
     private boolean isLoginMode=true;//是否处于登录状态（默认处于登录状态）
+
+    /**
+     * 启动Activity
+     */
+    public static void actionStart(Context context){
+        Intent intent=new Intent(context,LoginActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +101,12 @@ public class LoginActivity extends BaseActivity {
     private void invalidateView(){
         if(isLoginMode){
             userNameEditText.setVisibility(View.GONE);
-            registerBtn.setVisibility(View.GONE);
+            registerActionLayout.setVisibility(View.GONE);
             loginBtn.setVisibility(View.VISIBLE);
             forgetView.setVisibility(View.VISIBLE);
         }else{
             userNameEditText.setVisibility(View.VISIBLE);
-            registerBtn.setVisibility(View.VISIBLE);
+            registerActionLayout.setVisibility(View.VISIBLE);
             loginBtn.setVisibility(View.GONE);
             forgetView.setVisibility(View.GONE);
         }
@@ -107,6 +120,8 @@ public class LoginActivity extends BaseActivity {
         registerBtn= (Button) findViewById(R.id.btn_register);
         loginBtn= (Button) findViewById(R.id.btn_login);
         forgetView= (TextView) findViewById(R.id.text_view_forget);
+        registerActionLayout= (LinearLayout) findViewById(R.id.layout_register_action);
+        protocolView= (TextView) findViewById(R.id.text_view_protocol);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +133,18 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+        forgetView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ForgetActivity.actionStart(LoginActivity.this);//跳转
+            }
+        });
+        protocolView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO 用户协议
             }
         });
     }

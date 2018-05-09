@@ -21,6 +21,8 @@ public class PreferenceUtils {
     public static final String KEY_USER_SESSION_TOKEN="user_session_token";//存储SessionToken
     public static final String KEY_EMAIL_VERIFIED="email_verified";//邮箱是否已经验证
     public static final String KEY_AUTO_BACKUP="auto_backup";//是否允许自动同步数据
+    public static final String KEY_FEEDBACK="user_feedback";//存储反馈信息（临时）
+    public static final String KEY_LATEST_NOTIFICATION="latest_notification";//存储最近一次系统通知的发送时间
 
     private PreferenceUtils(){}
 
@@ -62,6 +64,21 @@ public class PreferenceUtils {
     //获取boolean类型的数据
     public static boolean getBoolean(Context context,String key){
         return getPreference(context).getBoolean(key,false);
+    }
+
+    //存储long类型的数据
+    public static void putLong(Context context,String key,long value){
+        getPreference(context).edit().putLong(key,value).apply();
+    }
+
+    //获取long类型的数据
+    public static long getLong(Context context,String key){
+        return getPreference(context).getLong(key,0);
+    }
+
+    //获取long类型的数据
+    public static long getLong(Context context,String key,long defaultValue){
+        return getPreference(context).getLong(key,defaultValue);
     }
 
     //清除指定信息

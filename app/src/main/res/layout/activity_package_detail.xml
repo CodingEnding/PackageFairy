@@ -1,216 +1,420 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <!-- Toolbar -->
+    <include layout="@layout/layout_toolbar"/>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include layout="@layout/layout_toolbar"/>
-
-        <android.support.v7.widget.CardView
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            app:cardCornerRadius="8dp">
+            android:paddingBottom="24dp"
+            android:orientation="vertical">
+
+            <!-- 顶部基础信息 -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp">
+                        <TextView
+                            android:id="@+id/text_view_package_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:textSize="24sp"
+                            android:textColor="@color/package_detail_text"
+                            tools:text="大王卡"/>
+                       <!-- <TextView
+                            android:id="@+id/text_view_start"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:textColor="@color/package_detail_star_text"
+                            android:textSize="20sp"
+                            android:gravity="end"
+                            tools:text="8.0分"/>-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp">
+                        <TextView
+                            android:id="@+id/text_view_partner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:textColor="@color/package_detail_tips_text"
+                            android:textSize="16sp"
+                            tools:text="阿里巴巴"/>
+                        <TextView
+                            android:id="@+id/text_view_operator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:textColor="@color/package_detail_tips_text"
+                            android:textSize="16sp"
+                            tools:text="中国联通"/>
+                        <TextView
+                            android:id="@+id/text_view_month_rent"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:textColor="@color/package_detail_text"
+                            android:textSize="18sp"
+                            android:gravity="end"
+                            tools:text="月租19元"/>
+                    </LinearLayout>
+
+                    <include layout="@layout/divider_line"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/package_detail_tips_text"
+                            android:textSize="17sp"
+                            android:text="@string/package_detail_title_call_in"/>
+                        <TextView
+                            android:id="@+id/text_view_package_calltime"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:textColor="@color/package_detail_text"
+                            android:textSize="18sp"
+                            tools:text="100分钟"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/package_detail_tips_text"
+                            android:textSize="17sp"
+                            android:text="@string/package_detail_title_call_out"/>
+                        <TextView
+                            android:id="@+id/text_view_extra_package_call"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:textColor="@color/package_detail_text"
+                            android:textSize="18sp"
+                            tools:text="0.1元/分钟"/>
+                    </LinearLayout>
+
+                    <include layout="@layout/divider_line"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/package_detail_tips_text"
+                            android:textSize="17sp"
+                            android:text="@string/package_detail_title_flow_in"/>
+                        <TextView
+                            android:id="@+id/text_view_package_flow"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:textColor="@color/package_detail_text"
+                            android:textSize="18sp"
+                            tools:text="省内500M 省外1GB"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/package_detail_tips_text"
+                            android:textSize="17sp"
+                            android:text="@string/package_detail_title_flow_in"/>
+                        <TextView
+                            android:id="@+id/text_view_extra_package_flow"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:textColor="@color/package_detail_text"
+                            android:textSize="18sp"
+                            android:lineSpacingMultiplier="1.3"
+                            tools:text="全国日租1元1GB"/>
+                    </LinearLayout>
+
+                    <include layout="@layout/divider_line"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/package_detail_tips_text"
+                        android:textSize="18sp"
+                        android:text="@string/package_detail_title_privilege"/>
+                    <TextView
+                        android:id="@+id/text_view_package_free_flow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginRight="16dp"
+                        android:lineSpacingMultiplier="1.3"
+                        android:textSize="16sp"
+                        android:textColor="@color/package_detail_privilege"
+                        tools:text="指定App免流" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 补充信息 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:textSize="22sp"
+                android:textColor="#212121"
+                android:text="@string/package_detail_title_more_info"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:lineSpacingMultiplier="1.2"
+                android:textSize="14sp"
+                android:text="@string/package_detail_title_more_description"/>
+
+            <!-- 下方补充信息区域 -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:divider="@drawable/drawable_line_gray"
+                    android:showDividers="middle">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:textColor="@color/package_detail_text"
+                            android:textSize="16sp"
+                            android:text="@string/package_detail_title_total_score"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="16dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/text_view_star"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/package_detail_text"
+                                android:textSize="18sp"
+                                tools:text="8.0分"/>
+                            <RatingBar
+                                android:id="@+id/rating_bar_star"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:numStars="5"
+                                android:stepSize="0.5"
+                                android:rating="4"
+                                android:isIndicator="true"
+                                style="@style/Widget.AppCompat.RatingBar.Small"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:textColor="@color/package_detail_text"
+                            android:textSize="16sp"
+                            android:text="@string/package_detail_title_my_score"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_horizontal"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="16dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/text_view_my_score"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#212121"
+                                android:textSize="18sp"
+                                android:text="4.0分"
+                                android:visibility="gone"/>
+                            <RatingBar
+                                android:id="@+id/rating_bar_my_score"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:numStars="5"
+                                android:stepSize="0.5"
+                                android:rating="3.5"
+                                android:isIndicator="true"
+                                style="@style/Widget.AppCompat.RatingBar.Small"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_month_consume"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="32dp"
+                        android:visibility="gone">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/package_detail_text"
+                            android:textSize="16sp"
+                            android:text="@string/package_detail_month_consume"/>
+                        <TextView
+                            android:id="@+id/text_view_month_consume"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:textColor="@color/package_detail_text"
+                            android:textSize="18sp"
+                            android:lineSpacingMultiplier="1.3"
+                            tools:text="29元"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_package_extra_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:textColor="@color/package_detail_text"
+                            android:textSize="16sp"
+                            android:text="@string/package_detail_extra_info"/>
+                        <TextView
+                            android:id="@+id/text_view_package_extra_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:lineSpacingMultiplier="1.3"
+                            android:textColor="#D9fb8c00"
+                            android:textSize="16sp"
+                            android:text="可以通过预存话费提升特权等级" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- 操作区域 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
+                <Button
+                    android:id="@+id/btn_package_link"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp">
-                    <TextView
-                        android:id="@+id/text_view_package_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="16dp"
-                        android:paddingRight="16dp"
-                        android:textSize="24sp"
-                        android:textColor="@color/package_detail_text"
-                        tools:text="大王卡"/>
-                    <TextView
-                        android:id="@+id/text_view_start"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="16dp"
-                        android:textColor="@color/package_detail_star_text"
-                        android:textSize="20sp"
-                        android:gravity="end"
-                        tools:text="8.0分"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_marginRight="6dp"
+                    style="?attr/buttonBarButtonStyle"
+                    android:text="@string/package_btn_link"
+                    android:textColor="@color/color_white"
+                    android:background="@drawable/link_btn_background"/>
+                <Button
+                    android:id="@+id/btn_package_score"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp">
-                    <TextView
-                        android:id="@+id/text_view_partner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:textColor="@color/package_detail_tips_text"
-                        android:textSize="16sp"
-                        tools:text="阿里巴巴"/>
-                    <TextView
-                        android:id="@+id/text_view_operator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:textColor="@color/package_detail_tips_text"
-                        android:textSize="16sp"
-                        tools:text="中国联通"/>
-                    <TextView
-                        android:id="@+id/text_view_month_rent"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="16dp"
-                        android:textColor="@color/package_detail_text"
-                        android:textSize="18sp"
-                        android:gravity="end"
-                        tools:text="月租19元"/>
-                </LinearLayout>
-
-                <include layout="@layout/divider_line"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/package_detail_tips_text"
-                        android:textSize="17sp"
-                        android:text="套餐内通话"/>
-                    <TextView
-                        android:id="@+id/text_view_package_calltime"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:textColor="@color/package_detail_text"
-                        android:textSize="18sp"
-                        tools:text="100分钟"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/package_detail_tips_text"
-                        android:textSize="17sp"
-                        android:text="套餐外通话"/>
-                    <TextView
-                        android:id="@+id/text_view_extra_package_call"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:textColor="@color/package_detail_text"
-                        android:textSize="18sp"
-                        tools:text="0.1元/分钟"/>
-                </LinearLayout>
-
-                <include layout="@layout/divider_line"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/package_detail_tips_text"
-                        android:textSize="17sp"
-                        android:text="套餐内流量"/>
-                    <TextView
-                        android:id="@+id/text_view_package_flow"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:textColor="@color/package_detail_text"
-                        android:textSize="18sp"
-                        tools:text="省内500M 省外1GB"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/package_detail_tips_text"
-                        android:textSize="17sp"
-                        android:text="套餐外流量"/>
-                    <TextView
-                        android:id="@+id/text_view_extra_package_flow"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:textColor="@color/package_detail_text"
-                        android:textSize="18sp"
-                        android:lineSpacingMultiplier="1.3"
-                        tools:text="全国日租1元1GB"/>
-                </LinearLayout>
-
-                <include layout="@layout/divider_line"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:textColor="@color/package_detail_tips_text"
-                    android:textSize="18sp"
-                    android:text="特权"/>
-
-                <TextView
-                    android:id="@+id/text_view_package_free_flow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginRight="16dp"
-                    android:lineSpacingMultiplier="1.3"
-                    android:textSize="16sp"
-                    android:textColor="@color/package_detail_privilege"
-                    tools:text="指定App免流" />
-
+                    android:layout_marginLeft="6dp"
+                    android:textColor="@color/color_white"
+                    android:text="@string/package_btn_score"
+                    android:background="@drawable/login_btn_background"/>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
 
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

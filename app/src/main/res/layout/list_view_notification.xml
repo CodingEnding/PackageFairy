@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="8dp"
+    android:divider="@drawable/drawable_line_gray"
+    android:showDividers="end">
+
+    <TextView
+        android:id="@+id/text_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textColor="@color/notification_title_text"
+        android:textSize="16sp"
+        tools:text="客户端升级提醒"/>
+
+    <TextView
+        android:id="@+id/text_view_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.3"
+        android:padding="8dp"
+        android:textColor="@color/notification_content_text"
+        android:textSize="14sp"
+        tools:text="预计近期将进行客户端升级，届时App将短暂关闭服务，感谢您的理解。（很快会恢复正常）"/>
+
+    <TextView
+        android:id="@+id/text_view_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:gravity="end"
+        android:textSize="12sp"
+        tools:text="2018-05-07 17:16:46"/>
+
+</LinearLayout>

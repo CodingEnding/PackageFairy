@@ -124,4 +124,14 @@
         <item name="android:paddingLeft">16dp</item>
     </style>
 
+    <!-- 忘记密码界面EditText的风格 -->
+    <style name="ForgetEditStyle">
+        <item name="android:paddingLeft">@dimen/forget_edit_padding_left</item>
+        <item name="android:paddingRight">@dimen/forget_edit_padding_right</item>
+        <item name="android:paddingTop">@dimen/forget_edit_padding_top</item>
+        <item name="android:paddingBottom">@dimen/forget_edit_padding_bottom</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/forget_edit_background</item>
+    </style>
+
 </resources>

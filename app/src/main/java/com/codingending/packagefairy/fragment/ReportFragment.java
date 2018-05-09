@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.codingending.packagefairy.MainActivity;
@@ -48,7 +49,8 @@ import retrofit2.Response;
 public class ReportFragment extends BaseFragment{
     private static final String TAG="ReportFragment";
 
-    private Button getRecommendBtn;
+//    private Button getRecommendBtn;
+    private ImageButton refreshBtn;
     private TextView titleView;
     private TextView tipsView;
 
@@ -76,6 +78,10 @@ public class ReportFragment extends BaseFragment{
         Bundle args=getArguments();
         args.clear();//先清空数据
         args.putAll(bundle);//添加新数据
+
+        if(dataList!=null){//清空历史推荐数据
+            dataList.clear();
+        }
     }
 
     @Override
@@ -116,6 +122,7 @@ public class ReportFragment extends BaseFragment{
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser&&dataList!=null&&dataList.isEmpty()){//此时未点击推荐按钮但是当前界面已经处于可见状态（因此如果此时还没有加载数据就对数据进行加载）
+            LogUtils.i(TAG,"loadRecommendData...");
             loadRecommendData();
         }
     }
@@ -141,18 +148,33 @@ public class ReportFragment extends BaseFragment{
         }
     }
 
-    //更新顶部提示信息
-    private void updateTopTipArea(){
+    /**
+     * 更新顶部提示信息
+     * @param fromServer 数据是否来自服务器
+     */
+    private void updateTopTipArea(boolean fromServer){
         if(dataList!=null&&!dataList.isEmpty()){
-            tipsView.setText(getString(R.string.report_recommend_tips));
-            getRecommendBtn.setText(getString(R.string.report_btn_new_recommend));
+            if(fromServer){//来自服务器
+                tipsView.setText(getString(R.string.report_recommend_tips));
+            }else{//来自本地
+                tipsView.setText(getString(R.string.report_recommend_history));
+            }
+            //getRecommendBtn.setText(getString(R.string.report_btn_new_recommend));
+        }else{
+            tipsView.setText(getString(R.string.report_no_data_tips));
+            //getRecommendBtn.setText(getString(R.string.report_btn_recommend));
         }
     }
 
-    //TODO
     //从数据库获得数据
     private void getRecommendFromDatabase(){
-        updateTopTipArea(); //更新顶部提示信息
+        List<PackageBean> packageBeanList=DBUtils.getRecommendPackageList(database);
+        if(packageBeanList!=null){
+            dataList.clear();//清除旧数据
+            dataList.addAll(packageBeanList);
+            reportRecyclerAdapter.notifyDataSetChanged();//刷新列表
+        }
+        updateTopTipArea(false); //更新顶部提示信息
     }
 
     //从服务器端请求数据
@@ -199,7 +221,8 @@ public class ReportFragment extends BaseFragment{
                             dataList.addAll(packageBeanList);
                             reportRecyclerAdapter.notifyDataSetChanged();//刷新列表
                         }
-                        updateTopTipArea(); //更新顶部提示信息
+                        saveDataToDatabase(packageBeanList);//将数据保存到本地
+                        updateTopTipArea(true); //更新顶部提示信息
                     }
                 }else{
                     LogUtils.w(TAG,"onResponse->获取套餐推荐结果失败！");
@@ -211,6 +234,20 @@ public class ReportFragment extends BaseFragment{
                 LogUtils.e(TAG,"Retrofit onFailure!");
             }
         });
+    }
+
+    /**
+     * 将从服务器获取的数据储存到本地数据库
+     * 在后台线程中执行
+     */
+    private void saveDataToDatabase(final List<PackageBean> dataList){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DBUtils.deleteAllRecommendPackage(database);//先删除所有历史数据
+                DBUtils.insertRecommendPackageList(database,dataList);//批量存储
+            }
+        }).start();
     }
 
     @Override
@@ -252,12 +289,13 @@ public class ReportFragment extends BaseFragment{
 
     @Override
     protected void initViews(View rootView) {
-        getRecommendBtn= (Button) rootView.findViewById(R.id.btn_get_recommend);
+//        getRecommendBtn= (Button) rootView.findViewById(R.id.btn_get_recommend);
+        refreshBtn= (ImageButton) rootView.findViewById(R.id.btn_refresh_package);
         titleView= (TextView) rootView.findViewById(R.id.text_view_report_title);
         tipsView= (TextView) rootView.findViewById(R.id.text_view_report_tips);
         reportRecyclerView= (RecyclerView) rootView.findViewById(R.id.recycler_view_report);
 
-        getRecommendBtn.setOnClickListener(new View.OnClickListener() {
+        refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(getActivity(),RecommendActivity.class),

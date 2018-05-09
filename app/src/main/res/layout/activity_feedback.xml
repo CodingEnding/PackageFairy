@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.codingending.packagefairy.activity.account.FeedbackActivity">
+
+    <!-- Toolbar -->
+    <include layout="@layout/layout_toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/edit_text_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/feedback_edit_background"
+                android:layout_margin="8dp"
+                android:padding="12dp"
+                android:inputType="textMultiLine"
+                android:gravity="start|top"
+                android:minLines="8"
+                android:maxLines="12"
+                android:textSize="16sp"
+                android:hint="@string/feedback_edit_tips"/>
+            <Button
+                android:id="@+id/btn_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/feedback_btn_background"
+                android:textColor="@color/feedback_btn_text"
+                android:text="@string/feedback_btn_text"
+                android:enabled="false"/>
+            <TextView
+                android:id="@+id/text_view_feedback_error_tips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:lineSpacingMultiplier="1.2"
+                android:gravity="center_horizontal"
+                android:text="@string/feedback_error_tips"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
