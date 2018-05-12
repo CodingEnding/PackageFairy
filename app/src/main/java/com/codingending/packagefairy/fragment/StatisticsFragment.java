@@ -80,7 +80,6 @@ import static android.content.Context.TELEPHONY_SERVICE;
  * 统计页面
  * Created by CodingEnding on 2018/4/5.
  */
-
 public class StatisticsFragment extends BaseFragment{
     private static final String TAG="StatisticsFragment";
     public static final int PERMISSION_REQUEST=2;//权限请求码
