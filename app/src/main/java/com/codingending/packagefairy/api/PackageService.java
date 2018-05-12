@@ -1,5 +1,6 @@
 package com.codingending.packagefairy.api;
 
+import com.codingending.packagefairy.entity.BaseResponse;
 import com.codingending.packagefairy.entity.DataResponse;
 import com.codingending.packagefairy.entity.PackageBean;
 import com.codingending.packagefairy.entity.SimplePackageBean;
@@ -9,6 +10,8 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -58,5 +61,22 @@ public interface PackageService {
                                                                      @Query("category_value") String categoryValue,
                                                                      @Query("limit") int limit,
                                                                      @Query("page") int page);
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded;charset=utf-8")
+    @POST("v1/package/score")
+    //对指定套餐评分
+    Call<BaseResponse> score(@Field("package_id") int packageId,
+                             @Field("user_id") int userId,
+                             @Field("score") int score);
+
+    @GET("v1/package/myScore")
+    //获取[我的评分]
+    Call<DataResponse<Integer>> getMyScore(@Query("package_id") int packageId,
+                                           @Query("user_id") int userId);
+
+    @GET("v1/package/scoreCount")
+    //获取指定套餐的评分人数
+    Call<DataResponse<Integer>> getScoreCount(@Query("package_id") int packageId);
 
 }

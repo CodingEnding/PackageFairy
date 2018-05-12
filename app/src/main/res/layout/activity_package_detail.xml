@@ -251,6 +251,7 @@
                         android:paddingBottom="8dp"
                         android:orientation="horizontal">
                         <TextView
+                            android:id="@+id/text_view_package_title_total_score"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
@@ -278,11 +279,14 @@
                                 android:id="@+id/rating_bar_star"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:minHeight="22dp"
+                                android:maxHeight="22dp"
                                 android:layout_marginTop="4dp"
                                 android:numStars="5"
                                 android:stepSize="0.5"
-                                android:rating="4"
+                                tools:rating="4"
                                 android:isIndicator="true"
+                                android:progressDrawable="@drawable/ratingbar_package_star"
                                 style="@style/Widget.AppCompat.RatingBar.Small"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -317,16 +321,19 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="#212121"
                                 android:textSize="18sp"
-                                android:text="4.0分"
+                                tools:text="4.0分"
                                 android:visibility="gone"/>
                             <RatingBar
                                 android:id="@+id/rating_bar_my_score"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:minHeight="20dp"
+                                android:maxHeight="20dp"
                                 android:numStars="5"
                                 android:stepSize="0.5"
-                                android:rating="3.5"
+                                tools:rating="3.5"
                                 android:isIndicator="true"
+                                android:progressDrawable="@drawable/ratingbar_package_my_score"
                                 style="@style/Widget.AppCompat.RatingBar.Small"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -338,8 +345,7 @@
                         android:paddingTop="16dp"
                         android:paddingBottom="16dp"
                         android:paddingLeft="16dp"
-                        android:paddingRight="32dp"
-                        android:visibility="gone">
+                        android:paddingRight="32dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -359,7 +365,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/layout_package_extra_info"
+                        android:id="@+id/layout_package_remark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -370,16 +376,16 @@
                             android:layout_marginTop="16dp"
                             android:textColor="@color/package_detail_text"
                             android:textSize="16sp"
-                            android:text="@string/package_detail_extra_info"/>
+                            android:text="@string/package_detail_remark"/>
                         <TextView
-                            android:id="@+id/text_view_package_extra_info"
+                            android:id="@+id/text_view_package_remark"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
                             android:lineSpacingMultiplier="1.3"
                             android:textColor="#D9fb8c00"
                             android:textSize="16sp"
-                            android:text="可以通过预存话费提升特权等级" />
+                            tools:text="可以通过预存话费提升特权等级" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -402,13 +408,14 @@
                     style="?attr/buttonBarButtonStyle"
                     android:text="@string/package_btn_link"
                     android:textColor="@color/color_white"
-                    android:background="@drawable/link_btn_background"/>
+                    android:background="@drawable/link_btn_background" />
                 <Button
                     android:id="@+id/btn_package_score"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
+                    style="?attr/buttonBarButtonStyle"
                     android:textColor="@color/color_white"
                     android:text="@string/package_btn_score"
                     android:background="@drawable/login_btn_background"/>

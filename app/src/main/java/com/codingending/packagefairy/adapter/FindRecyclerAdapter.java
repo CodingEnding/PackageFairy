@@ -68,8 +68,10 @@ public class FindRecyclerAdapter extends RecyclerView.Adapter<FindRecyclerAdapte
         bindListener(holder.itemView,packageBean);//设置监听器
 
         //随机设置顶部区域的背景色
-        int randNum=new Random().nextInt(50);
-        holder.topLayout.setBackgroundResource(colorIdArray[randNum%colorIdArray.length]);
+//        int randNum=new Random().nextInt(50);
+//        holder.topLayout.setBackgroundResource(colorIdArray[randNum%colorIdArray.length]);
+        //根据位置依次设置背景
+        holder.topLayout.setBackgroundResource(colorIdArray[position%colorIdArray.length]);
 
 //        if(packageBean.getFreeFlowType()==1){//存在免流应用信息
 //            holder.freeFlowView.setVisibility(View.VISIBLE);

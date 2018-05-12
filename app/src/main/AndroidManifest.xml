@@ -72,10 +72,17 @@
         <activity
             android:name=".activity.account.ForgetActivity"
             android:label="@string/activity_forget" />
-        <activity android:name=".activity.account.NotificationActivity"
-            android:label="@string/activity_notification"/>
-        <activity android:name=".activity.account.FeedbackActivity"
-            android:label="@string/activity_feedback"/>
+        <activity
+            android:name=".activity.account.NotificationActivity"
+            android:label="@string/activity_notification" />
+        <activity
+            android:name=".activity.account.FeedbackActivity"
+            android:label="@string/activity_feedback" />
+        <activity
+            android:name=".activity.account.UserProtocolActivity"
+            android:label="@string/activity_user_protocol" />
+        <activity android:name=".activity.account.AcknowledgeActivity"
+            android:label="@string/activity_acknowledge"/>
     </application>
 
 </manifest>

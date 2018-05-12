@@ -1,26 +1,39 @@
 package com.codingending.packagefairy.activity.account;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.codingending.packagefairy.R;
 import com.codingending.packagefairy.activity.BaseActivity;
 
 /**
- * 开源协议
+ * 用户协议
+ * @author CodingEnding
  */
-public class LibraryActivity extends BaseActivity {
+public class UserProtocolActivity extends BaseActivity {
+    private static final String TAG="UserProtocolActivity";
+
     private FrameLayout container;
     private WebView webView;
+
+    /**
+     * 启动Activity
+     */
+    public static void actionStart(Context context){
+        Intent intent=new Intent(context,UserProtocolActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_library);
+        setContentView(R.layout.activity_user_protocol);
         initViews();
         initToolbar();
         loadData();
@@ -31,9 +44,9 @@ public class LibraryActivity extends BaseActivity {
      */
     private void loadData(){
         if(webView!=null){
-            webView.loadUrl("file:///android_asset/library.html");
+            webView.loadUrl("file:///android_asset/user_protocol.html");
         }else{
-            showToast(R.string.library_load_error);
+            showToast(R.string.protocol_load_error);
         }
     }
 
@@ -62,7 +75,7 @@ public class LibraryActivity extends BaseActivity {
     @Override
     protected void initViews() {
         container= (FrameLayout) findViewById(R.id.container);
-        initWebView(); //初始化WebView
+        initWebView();//初始化WebView
     }
 
     @Override

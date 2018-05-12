@@ -22,7 +22,9 @@ public class PreferenceUtils {
     public static final String KEY_EMAIL_VERIFIED="email_verified";//邮箱是否已经验证
     public static final String KEY_AUTO_BACKUP="auto_backup";//是否允许自动同步数据
     public static final String KEY_FEEDBACK="user_feedback";//存储反馈信息（临时）
-    public static final String KEY_LATEST_NOTIFICATION="latest_notification";//存储最近一次系统通知的发送时间
+    public static final String KEY_LATEST_NOTIFICATION="latest_notification";//存储最近一次系统通知的发送时间（long）
+    public static final String KEY_LATEST_RECOMMEND_DATE="latest_recommend_date";//存储最近一次获得推荐套餐的日期（long）
+
 
     private PreferenceUtils(){}
 

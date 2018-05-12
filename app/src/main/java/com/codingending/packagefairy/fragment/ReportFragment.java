@@ -29,10 +29,13 @@ import com.codingending.packagefairy.entity.PackageBean;
 import com.codingending.packagefairy.entity.UserConsume;
 import com.codingending.packagefairy.po.FlowConsumePO;
 import com.codingending.packagefairy.utils.DBUtils;
+import com.codingending.packagefairy.utils.FormatUtils;
 import com.codingending.packagefairy.utils.LogUtils;
 import com.codingending.packagefairy.utils.PreferenceUtils;
 import com.codingending.packagefairy.utils.RetrofitUtils;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -157,7 +160,13 @@ public class ReportFragment extends BaseFragment{
             if(fromServer){//来自服务器
                 tipsView.setText(getString(R.string.report_recommend_tips));
             }else{//来自本地
-                tipsView.setText(getString(R.string.report_recommend_history));
+                long latestDate=PreferenceUtils.getLong(getActivity(),PreferenceUtils.KEY_LATEST_RECOMMEND_DATE);//获取最近一次的加载日期
+                if(latestDate>0){
+                    String dateStr=FormatUtils.simpleFormatDate(new Timestamp(latestDate));
+                    tipsView.setText(getString(R.string.report_recommend_history,dateStr));
+                }else{
+                    tipsView.setText(getString(R.string.report_recommend_history_no_date));
+                }
             }
             //getRecommendBtn.setText(getString(R.string.report_btn_new_recommend));
         }else{
@@ -223,6 +232,7 @@ public class ReportFragment extends BaseFragment{
                         }
                         saveDataToDatabase(packageBeanList);//将数据保存到本地
                         updateTopTipArea(true); //更新顶部提示信息
+                        updateLatestLoadDate();//更新最近一次的推荐套餐加载日期
                     }
                 }else{
                     LogUtils.w(TAG,"onResponse->获取套餐推荐结果失败！");
@@ -234,6 +244,11 @@ public class ReportFragment extends BaseFragment{
                 LogUtils.e(TAG,"Retrofit onFailure!");
             }
         });
+    }
+
+    //更新最近一次的推荐套餐加载日期
+    private void updateLatestLoadDate(){
+        PreferenceUtils.putLong(getActivity(),PreferenceUtils.KEY_LATEST_RECOMMEND_DATE,System.currentTimeMillis());
     }
 
     /**

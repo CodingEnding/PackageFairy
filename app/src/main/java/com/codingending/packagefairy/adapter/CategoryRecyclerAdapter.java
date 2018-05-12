@@ -24,7 +24,8 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
     private OnAdapterItemClickListener itemClickListener;
     private Random random;
 
-    private int[] backgroundIdArray={R.drawable.category_drawable_one,R.drawable.category_drawable_two,
+    private int[] backgroundIdArray={R.drawable.category_drawable_one,R.drawable.category_drawable_one,
+            R.drawable.category_drawable_one,R.drawable.category_drawable_three,
             R.drawable.category_drawable_three,R.drawable.category_drawable_four};//预置的背景drawable的Id数组
 
     public CategoryRecyclerAdapter(List<String> dataList, Context context) {
@@ -50,8 +51,10 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
         holder.categoryView.setText(category);
 
         //随机设置一个预置背景
-        int randNum=random.nextInt(50);
-        holder.categoryView.setBackgroundResource(backgroundIdArray[randNum%backgroundIdArray.length]);
+//        int randNum=random.nextInt(50);
+//        holder.categoryView.setBackgroundResource(backgroundIdArray[randNum%backgroundIdArray.length]);
+        //根据位置依次设置背景
+        holder.categoryView.setBackgroundResource(backgroundIdArray[position%backgroundIdArray.length]);
 
         bindListener(holder.itemView,category);//设置监听器
     }

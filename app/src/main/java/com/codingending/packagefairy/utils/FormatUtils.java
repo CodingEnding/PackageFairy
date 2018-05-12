@@ -38,4 +38,13 @@ public class FormatUtils {
         return simpleDateFormat.format(timestamp);
     }
 
+    /**
+     * 简单的日期格式化操作
+     * @param timestamp 日期
+     */
+    public static String simpleFormatDate(Timestamp timestamp){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日",Locale.CHINA);
+        return simpleDateFormat.format(timestamp);
+    }
+
 }
