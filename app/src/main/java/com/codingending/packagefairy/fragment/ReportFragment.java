@@ -204,7 +204,8 @@ public class ReportFragment extends BaseFragment{
         List<FlowConsume> flowConsumeList=null;
         if(recommendMode== UserConsume.RECOMMEND_MODE_ADVANCED){//在精准推荐的情况下才获取本月每种应用的流量消耗
             flowConsumeList=new ArrayList<>();
-            List<FlowConsumePO> flowConsumePOList=DBUtils.getMonthAppConsumeList(database,DBUtils.RECOMMEND_APP_COUNT);
+            List<FlowConsumePO> flowConsumePOList=DBUtils.getMonthAppConsumeList(database,
+                    DBUtils.RECOMMEND_APP_COUNT);
             for(FlowConsumePO temp:flowConsumePOList){//将FlowConsumePO转化为FlowConsume
                 flowConsumeList.add(FlowConsume.build(temp));
             }

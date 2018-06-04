@@ -24,7 +24,7 @@ public class PreferenceUtils {
     public static final String KEY_FEEDBACK="user_feedback";//存储反馈信息（临时）
     public static final String KEY_LATEST_NOTIFICATION="latest_notification";//存储最近一次系统通知的发送时间（long）
     public static final String KEY_LATEST_RECOMMEND_DATE="latest_recommend_date";//存储最近一次获得推荐套餐的日期（long）
-
+    public static final String KEY_LATEST_STATISTICS_DATE="latest_statistics_date";//存储最近一次统计数据的时间
 
     private PreferenceUtils(){}
 

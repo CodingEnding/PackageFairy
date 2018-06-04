@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.amitshekhar.DebugDB;
 import com.codingending.packagefairy.activity.BaseActivity;
 import com.codingending.packagefairy.activity.RecommendActivity;
 import com.codingending.packagefairy.activity.SearchActivity;
@@ -45,7 +47,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        LogUtils.w(TAG,"数据库地址:"+DebugDB.getAddressLog());//测试数据库的地址
         initViews();
         initToolbar();
         initViewPager();

@@ -28,6 +28,7 @@ import com.codingending.packagefairy.utils.ConsumeStatsUtils;
 import com.codingending.packagefairy.utils.DBUtils;
 import com.codingending.packagefairy.utils.DateUtils;
 import com.codingending.packagefairy.utils.LogUtils;
+import com.codingending.packagefairy.utils.PreferenceUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -137,16 +138,31 @@ public class ConsumeService extends Service {
 
             try {
                 if(isConsumeDataExist()){//判断数据库中是否已经存储了流量消耗数据
-                    LogUtils.i(TAG,"isConsumeDataExist true");
-                    getToDayConsumeStats(networkStatsManager,subscriberId);
-                    getTodayEachAppFlowStats(networkStatsManager,subscriberId);//记录今天每种应用的消耗量
+                    //LogUtils.i(TAG,"isConsumeDataExist true");
+                    long lastStatisticsTime=PreferenceUtils.getLong(this,
+                            PreferenceUtils.KEY_LATEST_STATISTICS_DATE);//上次的统计时间
+                    if(DateUtils.isSameDay(lastStatisticsTime,System.currentTimeMillis())){//更新本日数据
+                        LogUtils.i(TAG,"getTodayData");
+                        getToDayConsumeStats(networkStatsManager,subscriberId);
+                        getTodayEachAppFlowStats(networkStatsManager,subscriberId);//记录今天每种应用的消耗量
+                    }
+                    else{//从上次更新的那一天到今天的数据
+                        LogUtils.i(TAG,"getPeriodData");
+                        getPeriodConsumeStats(networkStatsManager,subscriberId,lastStatisticsTime);
+                        getPeriodEachAppFlowStats(networkStatsManager,subscriberId,lastStatisticsTime);
+                    }
                 }
                 else{
                     //如果当月第一天的数据不存在证明之前从未储存过数据，直接计算从当月第一天到今天的设备流量消耗和应用流量消耗
-                    LogUtils.i(TAG,"isConsumeDataExist false");
+                    LogUtils.i(TAG,"getMonthData");
                     getEachDayConsumeStats(networkStatsManager,subscriberId);
                     getMonthEachAppFlowStats(networkStatsManager,subscriberId);
                 }
+
+                //存储本次数据统计的时间戳
+                PreferenceUtils.putLong(ConsumeService.this,
+                        PreferenceUtils.KEY_LATEST_STATISTICS_DATE,System.currentTimeMillis());
+                //DBUtils.deleteTemp(database);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -179,6 +195,30 @@ public class ConsumeService extends Service {
                     startEnd,i+1,month,year));//逐一统计每天的流量消耗和通话时长
         }
         DBUtils.insertUserConsumeList(database,userConsumePOList);//批量存储
+    }
+
+    //获取一段时间内整体的流量消耗
+    @TargetApi(Build.VERSION_CODES.M)
+    private void getPeriodConsumeStats(NetworkStatsManager networkStatsManager,String subscriberId,long startTime) throws RemoteException {
+        LogUtils.i(TAG,"getPeriodConsumeStats");
+        List<StartEnd> timeList= DateUtils.getPeriodTimeList(startTime);
+        List<UserConsumePO> userConsumePOList=new ArrayList<>();
+
+        Calendar calendar=Calendar.getInstance();
+        int month=calendar.get(Calendar.MONTH)+1;//当前月份（从0开始）
+        int year=calendar.get(Calendar.YEAR);//当前年份
+
+        for(int i=0;i<timeList.size();i++){
+            StartEnd startEnd=timeList.get(i);
+            userConsumePOList.add(getUserConsume(networkStatsManager,subscriberId,
+                    startEnd,i+1,month,year));//逐一统计每天的流量消耗和通话时长
+        }
+        //更新或存储数据
+        for(UserConsumePO userConsumePO:userConsumePOList){
+            if(DBUtils.updateByDate(database,userConsumePO)!=1){//将数据更新到数据库中
+                DBUtils.insert(database,userConsumePO);//如果还没有数据则插入数据
+            }
+        }
     }
 
     //获取今日的通话时长和整体流量消耗
@@ -241,6 +281,30 @@ public class ConsumeService extends Service {
                     subscriberId,startEnd,i+1,month,year));//逐一统计每天的数据
         }
         DBUtils.insertFlowConsumeList(database,monthDataList);//批量插入数据
+    }
+
+    /**
+     * 获取一段时间内每种App的流量消耗
+     * 注意：querySummary的结果中包含很多的Bucket
+     * （同一个uid对应的所有Bucket加在一起才是这个应用在这段时间内的流量消耗量）
+     */
+    @TargetApi(Build.VERSION_CODES.M)
+    private void getPeriodEachAppFlowStats(NetworkStatsManager networkStatsManager,String subscriberId,long startTime) throws RemoteException {
+        LogUtils.i(TAG,"getPeriodEachAppFlowStats");
+        List<StartEnd> timeList=DateUtils.getPeriodTimeList(startTime);
+        List<FlowConsumePO> monthDataList=new ArrayList<>();//从开始时间那天到现在的数据列表
+
+        Calendar calendar=Calendar.getInstance();
+        int month=calendar.get(Calendar.MONTH)+1;//当前月份（从0开始）
+        int year=calendar.get(Calendar.YEAR);//当前年份
+
+        for(int i=0;i<timeList.size();i++){//循环获取从开始时间到现在的应用数据消耗
+            StartEnd startEnd=timeList.get(i);
+            monthDataList.addAll(getAppFlowConsumeList(networkStatsManager,
+                    subscriberId,startEnd,i+1,month,year));//逐一统计每天的数据
+        }
+        //更新或插入数据
+        DBUtils.updateOrInsertByDate(database,monthDataList);//批量更新或插入数据
     }
 
     /**

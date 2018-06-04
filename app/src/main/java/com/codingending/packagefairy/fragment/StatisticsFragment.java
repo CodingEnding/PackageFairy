@@ -169,13 +169,19 @@ public class StatisticsFragment extends BaseFragment{
         if(isConsumeDataExist()){//数据库中已经存储了消耗数据就直接加载
             loadDataFromDatabase();//从数据库中加载数据
         }
-        else{//否则为Fragment注册广播接收器，等待Service更新数据
-            localBroadcastManager=LocalBroadcastManager.getInstance(getActivity());
-            IntentFilter intentFilter=new IntentFilter();
-            intentFilter.addAction(ConsumeService.ACTION_STATS_UPDATE);
-            dataUpdateReceiver=new DataUpdateReceiver();
-            localBroadcastManager.registerReceiver(dataUpdateReceiver,intentFilter);
-        }
+//        else{//否则为Fragment注册广播接收器，等待Service更新数据
+//            localBroadcastManager=LocalBroadcastManager.getInstance(getActivity());
+//            IntentFilter intentFilter=new IntentFilter();
+//            intentFilter.addAction(ConsumeService.ACTION_STATS_UPDATE);
+//            dataUpdateReceiver=new DataUpdateReceiver();
+//            localBroadcastManager.registerReceiver(dataUpdateReceiver,intentFilter);
+//        }
+        //注册广播接收器，保证每次查看统计图时的都是最新的数据
+        localBroadcastManager=LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction(ConsumeService.ACTION_STATS_UPDATE);
+        dataUpdateReceiver=new DataUpdateReceiver();
+        localBroadcastManager.registerReceiver(dataUpdateReceiver,intentFilter);
     }
 
     /**

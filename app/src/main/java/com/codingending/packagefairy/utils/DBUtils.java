@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.Nullable;
 
+import com.codingending.packagefairy.api.PackageService;
 import com.codingending.packagefairy.database.PackageSQLiteOpenHelper;
 import com.codingending.packagefairy.entity.PackageBean;
 import com.codingending.packagefairy.entity.UserConsume;
@@ -27,6 +28,12 @@ public class DBUtils {
     public static final int RECOMMEND_APP_COUNT=10;//需要作为推荐依据的App的数量
 
     private DBUtils(){}
+
+    //删除指定日期的数据（用于修正数据）
+    public static void deleteTemp(SQLiteDatabase database){
+        database.delete(PackageSQLiteOpenHelper.TABLE_NAME_FLOW_CONSUME,"month=? and year=?",new String[]{"6","2018"});
+        database.delete(PackageSQLiteOpenHelper.TABLE_NAME_USER_CONSUME,"month=? and year=?",new String[]{"6","2018"});
+    }
 
     //获取一个数据库实例类
     public static SQLiteDatabase getDatabase(Context context){
