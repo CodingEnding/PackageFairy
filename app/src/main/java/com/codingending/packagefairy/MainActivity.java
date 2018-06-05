@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //LogUtils.w(TAG,"数据库地址:"+DebugDB.getAddressLog());//测试数据库的地址
+        //LogUtils.w(TAG,"数据库地址:"+ DebugDB.getAddressLog());//测试数据库的地址
         initViews();
         initToolbar();
         initViewPager();

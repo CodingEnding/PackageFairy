@@ -158,11 +158,10 @@ public class ConsumeService extends Service {
                     getEachDayConsumeStats(networkStatsManager,subscriberId);
                     getMonthEachAppFlowStats(networkStatsManager,subscriberId);
                 }
-
                 //存储本次数据统计的时间戳
                 PreferenceUtils.putLong(ConsumeService.this,
                         PreferenceUtils.KEY_LATEST_STATISTICS_DATE,System.currentTimeMillis());
-                //DBUtils.deleteTemp(database);
+                //DBUtils.deleteTemp(database);//清除旧数据（用于修正）
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -208,10 +207,13 @@ public class ConsumeService extends Service {
         int month=calendar.get(Calendar.MONTH)+1;//当前月份（从0开始）
         int year=calendar.get(Calendar.YEAR);//当前年份
 
+        int dayOfMonth=DateUtils.getDayOfMonth(startTime);//判断开始时间是当月第几天[从1开始]（用于储存数据）
+        LogUtils.i(TAG,"[整体]开始于当月第"+dayOfMonth+"天");
+        LogUtils.i(TAG,"[整体]共更新"+timeList.size()+"天");
         for(int i=0;i<timeList.size();i++){
             StartEnd startEnd=timeList.get(i);
             userConsumePOList.add(getUserConsume(networkStatsManager,subscriberId,
-                    startEnd,i+1,month,year));//逐一统计每天的流量消耗和通话时长
+                    startEnd,i+dayOfMonth,month,year));//逐一统计每天的流量消耗和通话时长
         }
         //更新或存储数据
         for(UserConsumePO userConsumePO:userConsumePOList){
@@ -298,10 +300,13 @@ public class ConsumeService extends Service {
         int month=calendar.get(Calendar.MONTH)+1;//当前月份（从0开始）
         int year=calendar.get(Calendar.YEAR);//当前年份
 
+        int dayOfMonth=DateUtils.getDayOfMonth(startTime);//判断开始时间是当月第几天[从1开始]（用于储存数据）
+        LogUtils.i(TAG,"[应用流量]开始于当月第"+dayOfMonth+"天");
+        LogUtils.i(TAG,"[应用流量]共更新"+timeList.size()+"天");
         for(int i=0;i<timeList.size();i++){//循环获取从开始时间到现在的应用数据消耗
             StartEnd startEnd=timeList.get(i);
             monthDataList.addAll(getAppFlowConsumeList(networkStatsManager,
-                    subscriberId,startEnd,i+1,month,year));//逐一统计每天的数据
+                    subscriberId,startEnd,i+dayOfMonth,month,year));//逐一统计每天的数据
         }
         //更新或插入数据
         DBUtils.updateOrInsertByDate(database,monthDataList);//批量更新或插入数据

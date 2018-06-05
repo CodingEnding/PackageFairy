@@ -48,6 +48,13 @@ public class DateUtils {
         return new StartEnd(start,end);
     }
 
+    //判断指定时间戳是当月是第几天
+    public static int getDayOfMonth(long startTime){
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTimeInMillis(startTime);
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
+
     //获取从本月第一天到现在的时间段列表
     public static List<StartEnd> getFirstMonthDayToNowTimeList(){
         List<StartEnd> timeList=new ArrayList<>();
