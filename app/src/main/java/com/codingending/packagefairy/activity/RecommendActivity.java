@@ -93,16 +93,21 @@ public class RecommendActivity extends BaseActivity {
 
     //从数据库中加载历史消耗数据
     private void loadData(){
-        UserConsumePO userConsumePO=DBUtils.getMonthTotalUserFlow(database);
+        UserConsumePO userConsumePO=DBUtils.getThirtyDayTotalUserFlow(database);
         double totalFlow=DEFAULT_FLOW;
         int totalCallTime=DEFAULT_CALL_TIME;
-//        LogUtils.i(TAG,userConsumePO.getDay()+" "+userConsumePO.getAllFlow()+" "+userConsumePO.getCallTime());
-        if(userConsumePO!=null&&userConsumePO.getDay()<MONTH_DAY_COUNT){//如果当前本月统计的天数还不足一个月，就简单预测出本月的消耗
-            int dayCount=userConsumePO.getDay();//本月具有数据统计的天数
-            totalCallTime=userConsumePO.getCallTime()*MONTH_DAY_COUNT/dayCount;//根据平均值预测本月的通话时长
-            totalCallTime=Math.min(totalCallTime,MAX_CALL_TIME);//MAX_CALL_TIME限制预测值的最大值
-            totalFlow=userConsumePO.getAllFlow()*MONTH_DAY_COUNT/dayCount/1024.0;//根据平均值预测本月的流量消耗（G）
-            totalFlow=Math.min(totalFlow,MAX_FLOW);//MAX_FLOW限制预测值的最大值
+        //LogUtils.i(TAG,userConsumePO.getDay()+" "+userConsumePO.getAllFlow()+" "+userConsumePO.getCallTime());
+        if(userConsumePO!=null){
+            if(userConsumePO.getDay()<MONTH_DAY_COUNT){//如果当前本月统计的天数还不足一个月，就简单预测出本月的消耗
+                int dayCount=userConsumePO.getDay();//本月具有数据统计的天数
+                totalCallTime=userConsumePO.getCallTime()*MONTH_DAY_COUNT/dayCount;//根据平均值预测本月的通话时长
+                totalCallTime=Math.min(totalCallTime,MAX_CALL_TIME);//MAX_CALL_TIME限制预测值的最大值
+                totalFlow=userConsumePO.getAllFlow()*MONTH_DAY_COUNT/dayCount/1024.0;//根据平均值预测本月的流量消耗（G）
+                totalFlow=Math.min(totalFlow,MAX_FLOW);//MAX_FLOW限制预测值的最大值
+            }else{
+                totalCallTime=userConsumePO.getCallTime();
+                totalFlow=userConsumePO.getAllFlow()/1024.0;//本月的流量消耗（G）
+            }
         }
         //为控件设置值
         DecimalFormat decimalFormat=new DecimalFormat("0.00");//小数保留两位

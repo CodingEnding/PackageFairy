@@ -33,6 +33,7 @@ import com.codingending.packagefairy.utils.FormatUtils;
 import com.codingending.packagefairy.utils.LogUtils;
 import com.codingending.packagefairy.utils.PreferenceUtils;
 import com.codingending.packagefairy.utils.RetrofitUtils;
+import com.google.gson.Gson;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -51,6 +52,7 @@ import retrofit2.Response;
 
 public class ReportFragment extends BaseFragment{
     private static final String TAG="ReportFragment";
+    public static final int MONTH_DAY_COUNT=30;//默认每个月是30天（方便计算）
 
 //    private Button getRecommendBtn;
     private ImageButton refreshBtn;
@@ -204,16 +206,25 @@ public class ReportFragment extends BaseFragment{
         List<FlowConsume> flowConsumeList=null;
         if(recommendMode== UserConsume.RECOMMEND_MODE_ADVANCED){//在精准推荐的情况下才获取本月每种应用的流量消耗
             flowConsumeList=new ArrayList<>();
-            List<FlowConsumePO> flowConsumePOList=DBUtils.getMonthAppConsumeList(database,
+            List<FlowConsumePO> flowConsumePOList=DBUtils.getThirtyDayAppConsumeList(database,
                     DBUtils.RECOMMEND_APP_COUNT);
             for(FlowConsumePO temp:flowConsumePOList){//将FlowConsumePO转化为FlowConsume
+                int dayCount=temp.getDay();//实际统计的天数
+                if(dayCount<MONTH_DAY_COUNT){//此时实际统计天数小于30，因此需要进行预测
+                    int oldFlowAmount=temp.getFlowAmount();//旧的应用数据使用量数据
+                    //LogUtils.i(TAG,"旧的应用流量:"+oldFlowAmount);
+                    temp.setFlowAmount(oldFlowAmount*MONTH_DAY_COUNT/dayCount);//使用平均值的方式预测本月的应用流量消耗
+                    //LogUtils.i(TAG,"新的应用流量:"+temp.getFlowAmount());
+                }
                 flowConsumeList.add(FlowConsume.build(temp));
             }
+            LogUtils.i(TAG,new Gson().toJson(flowConsumeList));//打印需要展示的应用数据
+            LogUtils.i(TAG,"[推荐]使用的应用数量:"+flowConsumePOList.size());
         }
 
         //构造用户消费数据实例
         UserConsume userConsume=new UserConsume(callTime,flow,provinceOutDay,deviceType,
-                systemVersion,deviceFinger,operatorList,recommendMode,null);
+                systemVersion,deviceFinger,operatorList,recommendMode,flowConsumeList);
 
         //发起网络请求
         Call<DataResponse<List<PackageBean>>> call=RetrofitUtils.getRetrofit()

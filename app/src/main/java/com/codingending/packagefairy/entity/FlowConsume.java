@@ -1,6 +1,7 @@
 package com.codingending.packagefairy.entity;
 
 import com.codingending.packagefairy.po.FlowConsumePO;
+import com.codingending.packagefairy.utils.LogUtils;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -14,7 +15,7 @@ public class FlowConsume {
 	@SerializedName("app_name")
 	private String appName;
 	@SerializedName("app_flow")
-	private int appFlow;//流量消耗
+	private int appFlow;//流量消耗（MB）
 
     /**
      * 快速构建方法
@@ -22,7 +23,8 @@ public class FlowConsume {
 	public static FlowConsume build(FlowConsumePO flowConsumePO){
 	    FlowConsume flowConsume=new FlowConsume();
 	    flowConsume.setAppName(flowConsumePO.getAppName());
-	    flowConsume.setAppFlow(flowConsumePO.getFlowAmount());
+	    flowConsume.setAppFlow(flowConsumePO.getFlowAmount()/1024);
+		//LogUtils.i("FlowConsume",flowConsume.getAppName()+":"+flowConsume.getAppFlow());
 	    return flowConsume;
     }
 	

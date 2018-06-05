@@ -6,16 +6,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.Nullable;
 
-import com.codingending.packagefairy.api.PackageService;
 import com.codingending.packagefairy.database.PackageSQLiteOpenHelper;
 import com.codingending.packagefairy.entity.PackageBean;
-import com.codingending.packagefairy.entity.UserConsume;
 import com.codingending.packagefairy.po.FlowConsumePO;
 import com.codingending.packagefairy.po.UserConsumePO;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 与数据库相关的工具类
@@ -23,6 +23,7 @@ import java.util.List;
  */
 
 public class DBUtils {
+    private static final String TAG="DBUtils";
     public static final int TOP_APP_COUNT=4;//需要统计的前N个App的数量
     public static final int RANK_APP_MAX_COUNT=50;//流量排行表中App的最大数量
     public static final int RECOMMEND_APP_COUNT=10;//需要作为推荐依据的App的数量
@@ -162,7 +163,7 @@ public class DBUtils {
     }
 
     /**
-     * 获取从本月第一天到现在的应用流量消耗情况（每种应用本月的流量总消耗）
+     * 获取本月应用流量消耗情况（每种应用本月的流量总消耗）
      * @param limit 数据条数最大值
      */
     public static List<FlowConsumePO> getMonthAppConsumeList(SQLiteDatabase database,int limit){
@@ -172,6 +173,7 @@ public class DBUtils {
         int month= calendar.get(Calendar.MONTH)+1;//Month字段为0-11
         int year= calendar.get(Calendar.YEAR);//year字段
 
+        //先获取本月的应用流量使用数据
         Cursor cursor=database.query(PackageSQLiteOpenHelper.TABLE_NAME_FLOW_CONSUME,new String[]{"month","year","app_name","sum(flow_amount)","package_name"},
                 "month=? and year=?",new String[]{String.valueOf(month),String.valueOf(year)},
                 "app_name",null,"sum(flow_amount) DESC",String.valueOf(limit));//按照流量消耗量降序排列
@@ -188,6 +190,91 @@ public class DBUtils {
             while(cursor.moveToNext());
         }
         cursor.close();//关闭资源
+
+        return flowConsumePOList;
+    }
+
+    /**
+     * 获取从最近30天应用流量消耗情况（每种应用本月的流量总消耗）
+     * @param limit 数据条数最大值
+     */
+    public static List<FlowConsumePO> getThirtyDayAppConsumeList(SQLiteDatabase database,int limit){
+        List<FlowConsumePO> flowConsumePOList=new ArrayList<>();
+
+        Calendar calendar=Calendar.getInstance();
+        int dayOfMonth=calendar.get(Calendar.DAY_OF_MONTH);//今日是当月第几天
+        int month= calendar.get(Calendar.MONTH)+1;//Month字段为0-11
+        int year= calendar.get(Calendar.YEAR);//year字段
+
+        //先获取本月的应用流量使用数据
+        Cursor cursor=database.query(PackageSQLiteOpenHelper.TABLE_NAME_FLOW_CONSUME,new String[]{"month","year","app_name","sum(flow_amount)","package_name"},
+                "month=? and year=?",new String[]{String.valueOf(month),String.valueOf(year)},
+                "app_name",null,"sum(flow_amount) DESC",String.valueOf(limit));//按照流量消耗量降序排列
+        Map<String,FlowConsumePO> rootMap=new HashMap<>();//存储原始的流量数据
+        if(cursor.moveToFirst()){
+            do{
+                String appName=cursor.getString(2);
+                FlowConsumePO flowConsumePO=new FlowConsumePO();
+                flowConsumePO.setDay(dayOfMonth);//这里用day暂时存储本月统计的天数
+                flowConsumePO.setMonth(cursor.getInt(0));
+                flowConsumePO.setYear(cursor.getInt(1));
+                flowConsumePO.setAppName(cursor.getString(2));
+                flowConsumePO.setFlowAmount(cursor.getInt(3));
+                flowConsumePO.setPackageName(cursor.getString(4));
+                rootMap.put(appName,flowConsumePO);
+            }
+            while(cursor.moveToNext());
+        }
+        LogUtils.i(TAG,"[获取应用使用量]第一次统计数量："+cursor.getCount());
+        cursor.close();//关闭资源
+
+        if(dayOfMonth<30){ //获取缺失的应用流量使用数据（从上月获取）
+            month=month-1;
+            int leaveDay=30-dayOfMonth;//剩余需要统计的天数
+            int leaveStartDay=30-leaveDay;//上月需要开始统计的天次
+
+            //计算本次统计的总天数
+            Cursor countCursor=database.query(PackageSQLiteOpenHelper.TABLE_NAME_FLOW_CONSUME,null,
+                    "month=? and year=? and day>=?",new String[]{String.valueOf(month),String.valueOf(year),String.valueOf(leaveStartDay)},
+                    "day",null,null,null);
+            int count=countCursor.getCount();
+            countCursor.close();
+            LogUtils.i(TAG,"[获取应用使用量]第二次统计的天数："+count);
+
+            Cursor cursor2=database.query(PackageSQLiteOpenHelper.TABLE_NAME_FLOW_CONSUME,new String[]{"month","year","app_name","sum(flow_amount)","package_name"},
+                    "month=? and year=? and day>=?",new String[]{String.valueOf(month),String.valueOf(year),String.valueOf(leaveStartDay)},
+                    "app_name",null,"sum(flow_amount) DESC",String.valueOf(limit));//按照流量消耗量降序排列
+            if(cursor2.moveToFirst()){
+                do{
+                    String appName=cursor2.getString(2);
+                    FlowConsumePO flowConsumePO=rootMap.get(appName);
+
+                    if(flowConsumePO!=null){//如果应用已存在则执行累加操作
+                        flowConsumePO.setFlowAmount(flowConsumePO.getFlowAmount()+cursor2.getInt(3));
+                        flowConsumePO.setDay(flowConsumePO.getDay()+count);//更新该应用的统计天数
+                    }else{
+                        flowConsumePO=new FlowConsumePO();
+                        flowConsumePO.setMonth(cursor2.getInt(0));
+                        flowConsumePO.setYear(cursor2.getInt(1));
+                        flowConsumePO.setAppName(cursor2.getString(2));
+                        flowConsumePO.setFlowAmount(cursor2.getInt(3));
+                        flowConsumePO.setPackageName(cursor2.getString(4));
+                        flowConsumePO.setDay(count);//设置该应用的统计天数
+                        rootMap.put(appName,flowConsumePO);
+                    }
+                    //flowConsumePO.setDay(dayOfMonth+count);//存储本次统计的总天数
+                }
+                while(cursor2.moveToNext());
+            }
+            LogUtils.i(TAG,"[获取应用使用量]本次统计的最大总天数："+(dayOfMonth+count));
+            LogUtils.i(TAG,"[获取应用使用量]第一次统计数量："+cursor2.getCount());
+            cursor2.close();//关闭资源
+        }
+
+        //将Map中的数据转移到List中
+        flowConsumePOList.addAll(rootMap.values());
+        LogUtils.i(TAG,"[获取应用使用量]最终的应用数量："+flowConsumePOList.size());
+
         return flowConsumePOList;
     }
 
@@ -277,6 +364,26 @@ public class DBUtils {
             userConsumePO.setCallTime(cursor.getInt(3));
             userConsumePO.setDay(cursor.getInt(4));//注意：此时的day属性就是本月存在数据的天数
         }
+        cursor.close();//关闭资源
+        return userConsumePO;
+    }
+
+    //获取最近30天流量/通话总消耗
+    public static @Nullable UserConsumePO getThirtyDayTotalUserFlow(SQLiteDatabase database){
+        Calendar calendar=Calendar.getInstance();
+        int month= calendar.get(Calendar.MONTH)+1;//Month字段为0-11
+        int year= calendar.get(Calendar.YEAR);//year字段
+
+        Cursor cursor=database.query(PackageSQLiteOpenHelper.TABLE_NAME_USER_CONSUME,null,null,null,
+                null,null,"id DESC","30");//按照id降序排列（实际上就是获取最新的30天数据）
+        UserConsumePO userConsumePO=new UserConsumePO(0,0,0,month,year);
+        if(cursor.moveToFirst()){//循环累加流量和通话时长
+            do{
+                userConsumePO.setAllFlow(userConsumePO.getAllFlow()+cursor.getInt(cursor.getColumnIndex("flow_all")));//M
+                userConsumePO.setCallTime(userConsumePO.getCallTime()+cursor.getInt(cursor.getColumnIndex("call_time")));//min
+            }while(cursor.moveToNext());
+        }
+        userConsumePO.setDay(cursor.getCount());//注意：此时的day属性就是本月存在数据的天数
         cursor.close();//关闭资源
         return userConsumePO;
     }
